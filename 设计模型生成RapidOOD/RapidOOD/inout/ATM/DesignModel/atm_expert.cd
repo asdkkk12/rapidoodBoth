@@ -1,0 +1,58 @@
+@startuml
+class BankCard {
+	- CardID : Integer
+	- CardStatus : CardStatus
+	- Catalog : CardCatalog
+	- Password : Integer
+	- Balance : Real
+}
+class User {
+	- UserID : Integer
+	- Name : String
+	- Address : String
+}
+class BankCardRepository {
+	+ findBankCard ( String condition ) : BankCard
+	+ updateBankCard ( BankCard object ) : boolean
+	+ deleteBankCard ( BankCard object ) : boolean
+	+ createBankCard ( ) : BankCard
+}
+class UserRepository {
+	+ findUser ( String condition ) : User
+	+ updateUser ( User object ) : boolean
+	+ deleteUser ( User object ) : boolean
+	+ createUser ( ) : User
+}
+class ATMSystem {
+	- BankCard : BankCard
+	- PasswordValidated : Boolean
+	- CardIDValidated : Boolean
+	- IsWithdraw : Boolean
+	- IsDeposit : Boolean
+	- WithdrawedNumber : Real
+	- DepositedNumber : Real
+	+ inputCard ( Integer cardid ) : boolean
+	+ inputPassword ( Integer password ) : boolean
+	+ withdrawCash ( Integer quantity ) : boolean
+	+ depositFunds ( Real quantity ) : boolean
+	+ checkBalance ( ) : Real
+	+ printReceipt ( ) : Real
+	+ ejectCard ( ) : boolean
+	+ cardIdentification ( ) : boolean
+}
+BankCard "*"--"1" BankCardRepository
+User "*"--"1" UserRepository
+BankCard "OwnedCard: *"--"BelongedUser: 1" User
+ATMSystem "*"--"1" BankCard
+ATMSystem "*"--"1" BankCardRepository
+ATMSystem "*"--"1" UserRepository
+enum CardStatus {
+	NORMAL
+	SUSPEND
+	CANNEL
+}
+enum CardCatalog {
+	CREDIT
+	DESPOSIT
+}
+@enduml

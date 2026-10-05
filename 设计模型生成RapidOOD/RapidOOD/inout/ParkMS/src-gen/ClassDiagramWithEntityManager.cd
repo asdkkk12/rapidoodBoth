@@ -1,0 +1,54 @@
+@startuml
+class ParkRecord {
+	- Id : Integer
+	- PlateNumber : String
+	- Type : VehicleType
+	- EntryTime : Date
+	- OutTime : Date
+	- IsParking : Boolean
+	- TotalPayment : Real
+	- Description : String
+}
+class Park {
+	- Id : Integer
+	- Name : String
+	- Location : String
+	- SmallPrice : Real
+	- LargePrice : Real
+	- MotoPrice : Real
+	- IsOpened : Boolean
+}
+class Vehicle {
+	- Id : Integer
+	- PlateNumber : String
+	- Type : VehicleType
+}
+class Member {
+	- Id : Integer
+	- Name : String
+	- Balance : Real
+}
+class ParkRepository {
+	+ findPark ( String condition ) : Park
+	+ updatePark ( Park object ) : boolean
+	+ deletePark ( Park object ) : boolean
+	+ createPark ( ) : Park
+}
+Park "*"--"1" ParkRepository
+class VehicleRepository {
+	+ findVehicle ( String condition ) : Vehicle
+	+ updateVehicle ( Vehicle object ) : boolean
+	+ deleteVehicle ( Vehicle object ) : boolean
+	+ createVehicle ( ) : Vehicle
+}
+Vehicle "*"--"1" VehicleRepository
+ParkRecord "OwningRecords: *"--"OwnedPark: 1" Park
+Park "Parks: *"--"OwningMembers: *" Member
+Vehicle "OwningVehicles: *"--"OwnedMember: 1" Member
+enum VehicleType {
+	SMALL
+	LARGE
+	MOTOCYCLE
+	SPECIAL
+}
+@enduml

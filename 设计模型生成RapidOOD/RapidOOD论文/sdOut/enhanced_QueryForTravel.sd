@@ -1,0 +1,14 @@
+@startuml
+participant Customer
+participant QueryForTravelService
+
+Customer -> QueryForTravelService : "queryStation"
+QueryForTravelService --> Customer : "queryStation return"
+Customer -> QueryForTravelService : "queryTrain"
+QueryForTravelService --> Customer : "queryTrain return"
+Customer -> QueryForTravelService : "queryRoute"
+QueryForTravelService --> Customer : "queryRoute return"
+Customer -> QueryForTravelService : "showPrice"
+QueryForTravelService --> Customer : "showPrice return"
+
+CallMessage:: callMsg0 ( "queryStation" Message0SenderEnd -> Message0ReceiveEnd ) ReturnMessage:: returnMsg1 ( "queryStation return" Message1SenderEnd -> Message1ReceiveEnd ) CallMessage:: callMsg2 ( "queryTrain" Message2SenderEnd -> Message2ReceiveEnd ) ReturnMessage:: returnMsg3 ( "queryTrain return" Message3SenderEnd -> Message3ReceiveEnd ) CallMessage:: callMsg4 ( "queryRoute" Message4SenderEnd -> Message4ReceiveEnd ) ReturnMessage:: returnMsg5 ( "queryRoute return" Message5SenderEnd -> Message5ReceiveEnd ) CallMessage:: callMsg6 ( "showPrice" Message6SenderEnd -> Message6ReceiveEnd ) ReturnMessage:: returnMsg7 ( "showPrice return" Message7SenderEnd -> Message7ReceiveEnd ) MessageEnd:: Message0SenderEnd ( Customer callMsg0 ) MessageEnd:: Message0ReceiveEnd ( QueryForTravelService callMsg0 ) MessageEnd:: Message1SenderEnd ( QueryForTravelService returnMsg1 ) MessageEnd:: Message1ReceiveEnd ( Customer returnMsg1 ) MessageEnd:: Message2SenderEnd ( Customer callMsg2 ) MessageEnd:: Message2ReceiveEnd ( QueryForTravelService callMsg2 ) MessageEnd:: Message3SenderEnd ( QueryForTravelService returnMsg3 ) MessageEnd:: Message3ReceiveEnd ( Customer returnMsg3 ) MessageEnd:: Message4SenderEnd ( Customer callMsg4 ) MessageEnd:: Message4ReceiveEnd ( QueryForTravelService callMsg4 ) MessageEnd:: Message5SenderEnd ( QueryForTravelService returnMsg5 ) MessageEnd:: Message5ReceiveEnd ( Customer returnMsg5 ) MessageEnd:: Message6SenderEnd ( Customer callMsg6 ) MessageEnd:: Message6ReceiveEnd ( QueryForTravelService callMsg6 ) MessageEnd:: Message7SenderEnd ( QueryForTravelService returnMsg7 ) MessageEnd:: Message7ReceiveEnd ( Customer returnMsg7 ) @enduml

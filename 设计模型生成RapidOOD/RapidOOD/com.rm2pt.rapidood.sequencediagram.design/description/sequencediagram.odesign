@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/sequence/description/2.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" name="sequencediagram" version="12.0.0.2017041100">
+  <ownedViewpoints name="SequenceDiagram">
+    <ownedRepresentations xsi:type="description_1:SequenceDiagramDescription" name="SequenceDiagram" initialisation="true" domainClass="sequenceDiagram::SequenceDiagram" enablePopupBars="true" endsOrdering="aql:self.ends" instanceRolesOrdering="aql:self.participants">
+      <metamodel href="../../com.rm2pt.rapidood.sd/model/generated/SequenceDiagram.ecore#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings xsi:type="description_1:InstanceRoleMapping" name="Participant" semanticCandidatesExpression="aql:self.participants" synchronizationLock="true" domainClass="sequenceDiagram::Participant">
+          <borderedNodeMappings xsi:type="description_1:ExecutionMapping" name="Lifeline" semanticCandidatesExpression="var:self" domainClass="sequenceDiagram::Participant" startingEndFinderExpression="var:self" finishingEndFinderExpression="var:self">
+            <borderedNodeMappings xsi:type="description_1:ExecutionMapping" name="Execution" semanticCandidatesExpression="aql:diagram.target.executions->select(e | e.start.context = self)" domainClass="sequenceDiagram::Execution" reusedBorderedNodeMappings="//@ownedViewpoints[name='SequenceDiagram']/@ownedRepresentations[name='SequenceDiagram']/@defaultLayer/@nodeMappings[name='Participant']/@borderedNodeMappings[name='Lifeline']/@borderedNodeMappings[name='Execution']" startingEndFinderExpression="aql:self.start" finishingEndFinderExpression="aql:self.end">
+              <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" showIcon="false" labelExpression="" labelPosition="node" resizeKind="NORTH_SOUTH" width="1" height="6">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+              </style>
+            </borderedNodeMappings>
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" showIcon="false" labelExpression="" labelPosition="node" resizeKind="NSEW" width="1" height="100">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </borderedNodeMappings>
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings xsi:type="description_1:BasicMessageMapping" name="CallMessage" semanticCandidatesExpression="aql:self.messages->select(o | o.oclIsTypeOf(sequenceDiagram::CallMessage))" sourceMapping="//@ownedViewpoints[name='SequenceDiagram']/@ownedRepresentations[name='SequenceDiagram']/@defaultLayer/@nodeMappings[name='Participant']/@borderedNodeMappings[name='Lifeline'] //@ownedViewpoints[name='SequenceDiagram']/@ownedRepresentations[name='SequenceDiagram']/@defaultLayer/@nodeMappings[name='Participant']/@borderedNodeMappings[name='Lifeline']/@borderedNodeMappings[name='Execution']" targetMapping="//@ownedViewpoints[name='SequenceDiagram']/@ownedRepresentations[name='SequenceDiagram']/@defaultLayer/@nodeMappings[name='Participant']/@borderedNodeMappings[name='Lifeline'] //@ownedViewpoints[name='SequenceDiagram']/@ownedRepresentations[name='SequenceDiagram']/@defaultLayer/@nodeMappings[name='Participant']/@borderedNodeMappings[name='Lifeline']/@borderedNodeMappings[name='Execution']" targetFinderExpression="aql:self.receivingEnd.context" sourceFinderExpression="aql:self.sendingEnd.context" domainClass="sequenceDiagram::CallMessage" useDomainElement="true" sendingEndFinderExpression="aql:self.sendingEnd" receivingEndFinderExpression="aql:self.receivingEnd">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+            <centerLabelStyleDescription labelSize="10" showIcon="false" labelExpression="aql:self.description">
+              <labelFormat>bold</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings xsi:type="description_1:BasicMessageMapping" name="ReturnMessage" semanticCandidatesExpression="aql:self.messages->select(o | o.oclIsTypeOf(sequenceDiagram::ReturnMessage))" sourceMapping="//@ownedViewpoints[name='SequenceDiagram']/@ownedRepresentations[name='SequenceDiagram']/@defaultLayer/@nodeMappings[name='Participant']/@borderedNodeMappings[name='Lifeline'] //@ownedViewpoints[name='SequenceDiagram']/@ownedRepresentations[name='SequenceDiagram']/@defaultLayer/@nodeMappings[name='Participant']/@borderedNodeMappings[name='Lifeline']/@borderedNodeMappings[name='Execution']" targetMapping="//@ownedViewpoints[name='SequenceDiagram']/@ownedRepresentations[name='SequenceDiagram']/@defaultLayer/@nodeMappings[name='Participant']/@borderedNodeMappings[name='Lifeline'] //@ownedViewpoints[name='SequenceDiagram']/@ownedRepresentations[name='SequenceDiagram']/@defaultLayer/@nodeMappings[name='Participant']/@borderedNodeMappings[name='Lifeline']/@borderedNodeMappings[name='Execution']" targetFinderExpression="aql:self.receivingEnd.context" sourceFinderExpression="aql:self.sendingEnd.context" domainClass="sequenceDiagram::ReturnMessage" useDomainElement="true" sendingEndFinderExpression="aql:self.sendingEnd" receivingEndFinderExpression="aql:self.receivingEnd">
+          <style lineStyle="dash" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+            <centerLabelStyleDescription labelSize="10" showIcon="false" labelExpression="aql:self.description">
+              <labelFormat>bold</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="com.rm2pt.rapidood.sequencediagram.design.Services"/>
+  </ownedViewpoints>
+</description:Group>

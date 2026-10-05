@@ -1,0 +1,103 @@
+grammar com.rm2pt.rapidood.sd.SequenceDiagram with org.eclipse.xtext.common.Terminals
+
+generate sequenceDiagram "http://www.rm2pt.com/rapidood/sd/SequenceDiagram"
+
+SequenceDiagram:
+	{SequenceDiagram}
+	'@startuml'
+	participants+=Participant*
+    elements+=Element*
+    messages+=AbstractMessage*
+    executions+=Execution*
+    ends+=MixEnd*
+    '@enduml';
+    
+
+Element:
+	Message | Activation | CombinedFragment | Deactivation
+;
+
+Participant:
+    'participant' name=ID ('as' alias=ID)?;
+
+ 
+Message:
+    sender=[Participant] arrow=ArrowType receiver=[Participant] (isCreate?='**')? ':' description=STRING;
+ 
+AbstractMessage:
+	CallMessage | ReturnMessage
+; 
+CallMessage:	
+	'CallMessage::' name=ID '('
+	description=STRING
+	sendingEnd=[MixEnd] '->'
+	receivingEnd=[MixEnd] 
+	')'	
+;
+
+ReturnMessage:	
+	'ReturnMessage::' name=ID '('
+	description=STRING
+	sendingEnd=[MixEnd] '->'
+	receivingEnd=[MixEnd] ')'
+;
+
+ArrowType:
+    SYNC='->' | RETURN='-->';
+
+
+Activation:
+	'activate' context=[Participant]
+;    
+
+Deactivation: 
+	'deactivate' context=[Participant]
+;
+
+Execution:
+	'Execution::' name=ID '('
+	owner=[Participant]
+	start=[ExecutionStart]
+	end=[ExecutionEnd] ')'
+;
+
+MixEnd:
+	MessageEnd | ExecutionStart | ExecutionEnd
+;
+
+MessageEnd:
+	'MessageEnd::' name=ID '('
+	context=[MultiContext]
+	message=[AbstractMessage] ')'
+;        
+
+ExecutionStart:
+	'ExecutionStart::' name=ID '('
+	context=[MultiContext]
+	execution=[Execution] ')'
+;
+
+ExecutionEnd:
+	'ExecutionEnd::' name=ID '('
+	context=[MultiContext]
+	execution=[Execution] ')'
+;
+
+MultiContext:
+	Participant | Execution
+;
+
+CombinedFragment:
+    type=CombinedFragmentType 
+    (condition=STRING)? 
+    elements+=Element* 
+    (alternatives+=AlternativeFragment)* 
+    'end';
+
+CombinedFragmentType:
+    ALT='alt' | OPT='opt' | LOOP='loop' | PAR='par' | BREAK='break';
+
+AlternativeFragment:
+    {AlternativeFragment} 
+    'else' (elseCondition=STRING)? 
+     elements+=Element*;

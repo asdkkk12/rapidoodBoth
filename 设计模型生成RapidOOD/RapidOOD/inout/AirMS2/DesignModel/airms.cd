@@ -1,0 +1,137 @@
+@startuml
+class WorkReport {
+	- Id : Integer
+	- Name : String
+	- Content : String
+	- Time : Date
+}
+class WorkTask {
+	- Id : Integer
+	- StaffName : String
+	- AdminName : String
+	- Phone : String
+	- Section : String
+	- Remark : String
+}
+class TerminalEquipment {
+	- Id : Integer
+	- Name : String
+	- Address : String
+	- Description : String
+	- Type : Integer
+	- Remark : String
+}
+class OperationStatus {
+	- Id : Integer
+	- Remark : String
+	- Status : String
+	- Value : String
+	- ValueUnit : String
+	- Time : Date
+	- Name : String
+}
+class User {
+	- Id : Integer
+	- Name : String
+	- Password : String
+	- Phone : String
+}
+class Role {
+	- Id : Integer
+	- RoleCode : Integer
+	- Remark : String
+}
+class Department {
+	- Id : Integer
+	- Name : String
+	- ContactRerson : String
+	- Principal : String
+	- Phone : String
+	- BriefInfo : String
+	- DescribeContent : String
+	- Remark : String
+}
+class TbRepair {
+	- Id : Integer
+	- Repairname : String
+	- Phone : String
+	- Place : String
+	- RepairsStatus : Integer
+	- DeviceId : String
+	- Status : Integer
+	- DescribeContent : String
+	- Score : Integer
+	- Remark : String
+	- Time : Date
+}
+class TbRepairExtra {
+	- Id : Integer
+	- Admin : Boolean
+	- IsReject : Boolean
+	- RejectCause : String
+	- RelayNum : Integer
+	- Arbitrate : Boolean
+	- IsAccept : Boolean
+	- IsComplete : Boolean
+	- Time : Date
+	- Resolvent : String
+	- Cause : String
+}
+class ProcessingFees {
+	- Id : Integer
+	- ProjectName : String
+	- Price : Real
+	- Number : Integer
+	- TotalPrice : Real
+	- Remake : String
+}
+class DeviceInfo {
+	- Id : Integer
+	- Name : String
+	- Brand : String
+	- Type : String
+	- Address : String
+	- AdminName : String
+	- ContactsName : String
+	- Status : Integer
+	- Remark : String
+}
+class DeviceLocationGroup {
+	- Id : Integer
+	- Name : String
+	- Remark : String
+}
+class EquipmentFailureType {
+	- Id : Integer
+	- Name : String
+	- DescribeContent : String
+	- Remark : String
+}
+class DeviceStatus {
+	- Id : Integer
+	- Name : String
+	- Remark : String
+}
+class DeviceAssociationGroup {
+	- Id : Integer
+	- Name : String
+	- Remark : String
+}
+TerminalEquipment--"BelongedDeviceInfo: 1" DeviceInfo
+OperationStatus--"BelongedEquipment: 1" TerminalEquipment
+User "ContainedUsers: *"--"BelongedRole: 1" Role
+User--"BelongedDepartment: 1" Department
+TbRepair--"BelongedUser: 1" User
+TbRepair--"BelongedDepartment: 1" Department
+TbRepair "BelongedTbRepair: 1"--"AssoicatedTRE: 1" TbRepairExtra
+TbRepair--"BelongedEFT: 1" EquipmentFailureType
+TbRepairExtra--"BelongedAssignDepart: 1" Department
+TbRepairExtra--"BelongedDistribution: 1" User
+TbRepairExtra--"BelongedRelayDep: 1" Department
+ProcessingFees--"BelongedTbRepair: 1" TbRepair
+DeviceInfo--"BelongedDLG: 1" DeviceLocationGroup
+DeviceInfo--"BelongedEFT: 1" EquipmentFailureType
+DeviceInfo--"BelongedDAG: 1" DeviceAssociationGroup
+DeviceInfo--"BelongedDepartment: 1" Department
+EquipmentFailureType--"BelongedDepartment: 1" Department
+@enduml

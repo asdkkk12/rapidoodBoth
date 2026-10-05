@@ -1,0 +1,35 @@
+@startuml
+participant Customer
+participant PreserveService
+
+Customer -> PreserveService : "checkSecurity"
+PreserveService --> Customer : "checkSecurity return"
+Customer -> PreserveService : "queryContacts"
+PreserveService --> Customer : "queryContacts return"
+Customer -> PreserveService : "queryTravels"
+PreserveService --> Customer : "queryTravels return"
+Customer -> PreserveService : "queryTravelInfo"
+PreserveService --> Customer : "queryTravelInfo return"
+Customer -> PreserveService : "createNewOrder"
+PreserveService --> Customer : "createNewOrder return"
+Customer -> PreserveService : "buyAssurance"
+PreserveService --> Customer : "buyAssurance return"
+Customer -> PreserveService : "addFoodOrder"
+PreserveService --> Customer : "addFoodOrder return"
+Customer -> PreserveService : "addConsign"
+PreserveService --> Customer : "addConsign return"
+
+PreserveService -> PreserveService : "[Definition] securityConfig = securityInfoCheck()"
+PreserveService -> PreserveService : "[Definition] contract = Contracts.allInstance()"
+PreserveService -> PreserveService : "[Definition] travels = Travel.allInstance()"
+PreserveService -> PreserveService : "[Definition] travel = queryForTravel()"
+PreserveService -> PreserveService : "[Definition] user = User.allInstance()"
+PreserveService -> PreserveService : "[Postcondition] Order.allInstance()->includes(o)"
+PreserveService -> PreserveService : "[Postcondition] distributeSeat()"
+PreserveService -> PreserveService : "[Postcondition] Assurance.allInstance()->includes(a)"
+PreserveService -> PreserveService : "[Postcondition] Food.allInstance()->includes(f)"
+PreserveService -> PreserveService : "[Postcondition] Consign.allInstance()->includes(c)"
+PreserveService -> PreserveService : "[Postcondition] order_create_success()"
+PreserveService -> PreserveService : "[Postcondition] result = true"
+
+@enduml

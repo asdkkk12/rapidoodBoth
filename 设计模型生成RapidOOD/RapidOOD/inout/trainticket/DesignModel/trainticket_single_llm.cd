@@ -1,0 +1,165 @@
+@startuml
+' Candidate output for the Single-LLM condition.
+' Generated directly from trainticket.remodel without iterative refactoring.
+
+class User {
+    - UserId : String
+    - UserName : String
+    - Password : String
+    - Email : String
+}
+class Accout {
+    - Id : String
+    - LoginId : String
+    - Password : String
+    - Name : String
+    - Money : Real
+}
+class Contacts {
+    - Id : String
+    - AccountId : String
+    - Name : String
+    - DocumentNumber : String
+    - PhoneNumber : String
+}
+class Order {
+    - Id : String
+    - TravelDate : String
+    - TrainNumber : String
+    - SeatNumber : String
+    - From : String
+    - To : String
+    - Status : Integer
+    - Price : Real
+}
+class Train {
+    - Id : String
+    - Name : String
+    - EconomyClass : Integer
+    - ConfortClass : Integer
+}
+class Trip {
+    - Id : String
+    - TrainName : String
+    - RouteId : String
+    - StartStationName : String
+    - TerminalStationName : String
+    - StartTime : String
+    - EndTime : String
+}
+class Route {
+    - Id : String
+    - Stations : Set
+    - StartStation : String
+    - EndStation : String
+}
+class Station {
+    - Id : String
+    - Name : String
+    - StayTime : Integer
+}
+class Seat {
+    - TravelDate : String
+    - TrainNumber : String
+    - StartStation : String
+    - DestStation : String
+    - SeatType : Integer
+}
+class Travel {
+    - StartPlace : String
+    - EndPlace : String
+    - DepartureTime : String
+}
+class Payment {
+    - Id : String
+    - OrderId : String
+    - UserId : String
+    - Price : Real
+    - Type : PaymentType
+}
+class Assurance {
+    - Id : String
+    - OrderId : String
+    - Type : AssuranceType
+}
+class Consign {
+    - Id : String
+    - OrderId : String
+    - From : String
+    - To : String
+    - Weight : Real
+    - Consignee : String
+}
+class Food {
+    - Id : String
+    - OrderId : String
+    - StationName : String
+    - FoodName : String
+    - Price : Real
+}
+class StationFoodStore {
+    - Id : String
+    - StationId : String
+    - StoreName : String
+    - DeliveryFee : Real
+}
+class WaitListOrder {
+    - Id : String
+    - AccountId : String
+    - ContactsId : String
+    - TripId : String
+    - SeatType : Integer
+}
+
+class TrainticketSystem {
+    + queryForTravel ( Travel info ) : Boolean
+    + cancelTicket ( String orderId, String loginId ) : Boolean
+    + executeTicket ( ) : Boolean
+    + pay ( ) : Boolean
+    + drawBack ( ) : Boolean
+    + preserve ( ) : Boolean
+    + rebook ( ) : Boolean
+    + getCheapestRoutes ( ) : Boolean
+    + getQuickestRoutes ( ) : Boolean
+    + getMinStopRoutes ( ) : Boolean
+    + getTransferResult ( ) : Boolean
+    + manageUser ( ) : Boolean
+    + manageTrain ( ) : Boolean
+    + manageOrder ( ) : Boolean
+    + manageFood ( ) : Boolean
+    + manageConsign ( ) : Boolean
+    + managePayment ( ) : Boolean
+    + distributeSeat ( ) : Boolean
+}
+
+User "1" -- "*" Accout
+Accout "1" -- "*" Contacts
+Accout "1" -- "*" Order
+Order "1" -- "*" Payment
+Order "1" -- "*" Assurance
+Order "1" -- "*" Consign
+Order "1" -- "*" Food
+Order "*" -- "1" Trip
+Trip "*" -- "1" Train
+Trip "*" -- "1" Route
+Route "1" -- "*" Station
+Train "1" -- "*" Seat
+StationFoodStore "1" -- "*" Food
+Accout "1" -- "*" WaitListOrder
+WaitListOrder "*" -- "1" Trip
+TrainticketSystem ..> Order
+TrainticketSystem ..> Trip
+TrainticketSystem ..> Payment
+TrainticketSystem ..> Route
+
+enum AssuranceType {
+    VEHICLE
+    OTHERS
+}
+enum PaymentType {
+    D
+    P
+    O
+    E
+}
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+participant Customer
+participant PreserveService
+
+Customer -> PreserveService : "checkSecurity"
+PreserveService --> Customer : "checkSecurity return"
+Customer -> PreserveService : "queryContacts"
+PreserveService --> Customer : "queryContacts return"
+Customer -> PreserveService : "queryTravels"
+PreserveService --> Customer : "queryTravels return"
+Customer -> PreserveService : "queryTravelInfo"
+PreserveService --> Customer : "queryTravelInfo return"
+Customer -> PreserveService : "createNewOrder"
+PreserveService --> Customer : "createNewOrder return"
+Customer -> PreserveService : "buyAssurance"
+PreserveService --> Customer : "buyAssurance return"
+Customer -> PreserveService : "addFoodOrder"
+PreserveService --> Customer : "addFoodOrder return"
+Customer -> PreserveService : "addConsign"
+PreserveService --> Customer : "addConsign return"
+
+CallMessage:: callMsg0 ( "checkSecurity" Message0SenderEnd -> Message0ReceiveEnd ) ReturnMessage:: returnMsg1 ( "checkSecurity return" Message1SenderEnd -> Message1ReceiveEnd ) CallMessage:: callMsg2 ( "queryContacts" Message2SenderEnd -> Message2ReceiveEnd ) ReturnMessage:: returnMsg3 ( "queryContacts return" Message3SenderEnd -> Message3ReceiveEnd ) CallMessage:: callMsg4 ( "queryTravels" Message4SenderEnd -> Message4ReceiveEnd ) ReturnMessage:: returnMsg5 ( "queryTravels return" Message5SenderEnd -> Message5ReceiveEnd ) CallMessage:: callMsg6 ( "queryTravelInfo" Message6SenderEnd -> Message6ReceiveEnd ) ReturnMessage:: returnMsg7 ( "queryTravelInfo return" Message7SenderEnd -> Message7ReceiveEnd ) CallMessage:: callMsg8 ( "createNewOrder" Message8SenderEnd -> Message8ReceiveEnd ) ReturnMessage:: returnMsg9 ( "createNewOrder return" Message9SenderEnd -> Message9ReceiveEnd ) CallMessage:: callMsg10 ( "buyAssurance" Message10SenderEnd -> Message10ReceiveEnd ) ReturnMessage:: returnMsg11 ( "buyAssurance return" Message11SenderEnd -> Message11ReceiveEnd ) CallMessage:: callMsg12 ( "addFoodOrder" Message12SenderEnd -> Message12ReceiveEnd ) ReturnMessage:: returnMsg13 ( "addFoodOrder return" Message13SenderEnd -> Message13ReceiveEnd ) CallMessage:: callMsg14 ( "addConsign" Message14SenderEnd -> Message14ReceiveEnd ) ReturnMessage:: returnMsg15 ( "addConsign return" Message15SenderEnd -> Message15ReceiveEnd ) MessageEnd:: Message0SenderEnd ( Customer callMsg0 ) MessageEnd:: Message0ReceiveEnd ( PreserveService callMsg0 ) MessageEnd:: Message1SenderEnd ( PreserveService returnMsg1 ) MessageEnd:: Message1ReceiveEnd ( Customer returnMsg1 ) MessageEnd:: Message2SenderEnd ( Customer callMsg2 ) MessageEnd:: Message2ReceiveEnd ( PreserveService callMsg2 ) MessageEnd:: Message3SenderEnd ( PreserveService returnMsg3 ) MessageEnd:: Message3ReceiveEnd ( Customer returnMsg3 ) MessageEnd:: Message4SenderEnd ( Customer callMsg4 ) MessageEnd:: Message4ReceiveEnd ( PreserveService callMsg4 ) MessageEnd:: Message5SenderEnd ( PreserveService returnMsg5 ) MessageEnd:: Message5ReceiveEnd ( Customer returnMsg5 ) MessageEnd:: Message6SenderEnd ( Customer callMsg6 ) MessageEnd:: Message6ReceiveEnd ( PreserveService callMsg6 ) MessageEnd:: Message7SenderEnd ( PreserveService returnMsg7 ) MessageEnd:: Message7ReceiveEnd ( Customer returnMsg7 ) MessageEnd:: Message8SenderEnd ( Customer callMsg8 ) MessageEnd:: Message8ReceiveEnd ( PreserveService callMsg8 ) MessageEnd:: Message9SenderEnd ( PreserveService returnMsg9 ) MessageEnd:: Message9ReceiveEnd ( Customer returnMsg9 ) MessageEnd:: Message10SenderEnd ( Customer callMsg10 ) MessageEnd:: Message10ReceiveEnd ( PreserveService callMsg10 ) MessageEnd:: Message11SenderEnd ( PreserveService returnMsg11 ) MessageEnd:: Message11ReceiveEnd ( Customer returnMsg11 ) MessageEnd:: Message12SenderEnd ( Customer callMsg12 ) MessageEnd:: Message12ReceiveEnd ( PreserveService callMsg12 ) MessageEnd:: Message13SenderEnd ( PreserveService returnMsg13 ) MessageEnd:: Message13ReceiveEnd ( Customer returnMsg13 ) MessageEnd:: Message14SenderEnd ( Customer callMsg14 ) MessageEnd:: Message14ReceiveEnd ( PreserveService callMsg14 ) MessageEnd:: Message15SenderEnd ( PreserveService returnMsg15 ) MessageEnd:: Message15ReceiveEnd ( Customer returnMsg15 ) @enduml

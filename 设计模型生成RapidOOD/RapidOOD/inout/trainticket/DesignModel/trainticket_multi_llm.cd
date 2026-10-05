@@ -1,0 +1,264 @@
+@startuml
+' Candidate output for the Multi-LLM condition.
+' Generated after repeated generation, quality assessment, and refactoring.
+
+class User {
+    - UserId : String
+    - UserName : String
+    - Password : String
+    - Roles : Set
+    - Email : String
+}
+class Accout {
+    - Id : String
+    - LoginId : String
+    - Password : String
+    - Name : String
+    - Money : Real
+    - Email : String
+}
+class Contacts {
+    - Id : String
+    - AccountId : String
+    - Name : String
+    - DocumentNumber : String
+    - PhoneNumber : String
+}
+class Order {
+    - Id : String
+    - TravelDate : String
+    - TravelTime : String
+    - AccoutId : String
+    - TrainNumber : String
+    - SeatClass : Integer
+    - SeatNumber : String
+    - From : String
+    - To : String
+    - Status : Integer
+    - Price : Real
+}
+class Train {
+    - Id : String
+    - Name : String
+    - EconomyClass : Integer
+    - ConfortClass : Integer
+    - AverageSpeed : Integer
+}
+class Trip {
+    - Id : String
+    - TrainName : String
+    - RouteId : String
+    - StartStationName : String
+    - TerminalStationName : String
+    - StartTime : String
+    - EndTime : String
+}
+class Route {
+    - Id : String
+    - Stations : Set
+    - Distances : Set
+    - StartStation : String
+    - EndStation : String
+}
+class Station {
+    - Id : String
+    - Name : String
+    - StayTime : Integer
+}
+class Seat {
+    - TravelDate : String
+    - TrainNumber : String
+    - StartStation : String
+    - DestStation : String
+    - SeatType : Integer
+}
+class Payment {
+    - Id : String
+    - OrderId : String
+    - UserId : String
+    - Price : Real
+    - Type : PaymentType
+}
+class Assurance {
+    - Id : String
+    - OrderId : String
+    - Type : AssuranceType
+}
+class Consign {
+    - Id : String
+    - OrderId : String
+    - AccoutId : String
+    - From : String
+    - To : String
+    - Consignee : String
+    - Phone : String
+    - Weight : Real
+    - IsWithin : Boolean
+}
+class ConsignPrice {
+    - Id : String
+    - InitialWeight : Real
+    - InitialPrice : Real
+    - WithinPrice : Real
+    - BeyondPrice : Real
+}
+class Food {
+    - Id : String
+    - OrderId : String
+    - StationName : String
+    - StoreName : String
+    - FoodName : String
+    - Price : Real
+}
+class StationFoodStore {
+    - Id : String
+    - StationId : String
+    - StoreName : String
+    - Telephone : String
+    - BusinessTime : String
+    - DeliveryFee : Real
+}
+class FoodDeliveryOrder {
+    - Id : String
+    - StationFoodStoreId : String
+    - TripId : String
+    - SeatNo : Integer
+    - DeliveryTime : String
+}
+class WaitListOrder {
+    - Id : String
+    - TravelTime : String
+    - AccountId : String
+    - ContactsId : String
+    - TrainNumber : String
+    - SeatType : Integer
+}
+class Price {
+    - Id : String
+    - TrainType : String
+    - RouteId : String
+    - BasicPriceRate : Real
+    - FirstClassPriceRate : Real
+}
+class Config {
+    - Name : String
+    - Value : String
+    - Description : String
+}
+
+class UserRepository {
+    + findUser ( String condition ) : User
+    + updateUser ( User object ) : Boolean
+    + deleteUser ( User object ) : Boolean
+    + createUser ( ) : User
+}
+class AccountRepository {
+    + findAccout ( String condition ) : Accout
+    + updateAccout ( Accout object ) : Boolean
+    + deleteAccout ( Accout object ) : Boolean
+    + createAccout ( ) : Accout
+}
+class OrderRepository {
+    + findOrder ( String condition ) : Order
+    + updateOrder ( Order object ) : Boolean
+    + deleteOrder ( Order object ) : Boolean
+    + createOrder ( ) : Order
+}
+class TrainRepository {
+    + findTrain ( String condition ) : Train
+    + updateTrain ( Train object ) : Boolean
+    + deleteTrain ( Train object ) : Boolean
+    + createTrain ( ) : Train
+}
+class RouteRepository {
+    + findRoute ( String condition ) : Route
+    + updateRoute ( Route object ) : Boolean
+    + deleteRoute ( Route object ) : Boolean
+    + createRoute ( ) : Route
+}
+
+class QueryService {
+    + queryForTravel ( Travel info ) : Boolean
+    + getCheapestRoutes ( ) : Boolean
+    + getQuickestRoutes ( ) : Boolean
+    + getMinStopRoutes ( ) : Boolean
+    + getTransferResult ( ) : Boolean
+}
+class OrderService {
+    + preserve ( ) : Boolean
+    + executeTicket ( ) : Boolean
+    + cancelTicket ( String orderId, String loginId ) : Boolean
+    + rebook ( ) : Boolean
+    + distributeSeat ( ) : Boolean
+}
+class PaymentService {
+    + pay ( ) : Boolean
+    + drawBack ( ) : Boolean
+    + payDifference ( ) : Boolean
+    + managePayment ( ) : Boolean
+}
+class ConsignService {
+    + getPriceByWeightAndRegion ( ) : Boolean
+    + manageConsign ( ) : Boolean
+    + manageConsignPrice ( ) : Boolean
+}
+class FoodService {
+    + manageFood ( ) : Boolean
+    + getFoodStores ( ) : Boolean
+    + getTrainFood ( ) : Boolean
+    + manageFoodDelivery ( ) : Boolean
+}
+class AdministrationService {
+    + manageUser ( ) : Boolean
+    + manageTrain ( ) : Boolean
+    + manageRoute ( ) : Boolean
+    + manageOrder ( ) : Boolean
+    + manageConfig ( ) : Boolean
+}
+
+User "1" -- "*" Accout
+Accout "1" -- "*" Contacts
+Accout "1" -- "*" Order
+Order "1" -- "*" Payment
+Order "1" -- "*" Assurance
+Order "1" -- "*" Consign
+Order "1" -- "*" Food
+Order "*" -- "1" Trip
+Trip "*" -- "1" Train
+Trip "*" -- "1" Route
+Route "1" -- "*" Station
+Train "1" -- "*" Seat
+StationFoodStore "1" -- "*" Food
+StationFoodStore "1" -- "*" FoodDeliveryOrder
+FoodDeliveryOrder "*" -- "1" Trip
+WaitListOrder "*" -- "1" Trip
+Accout "1" -- "*" WaitListOrder
+Price "*" -- "1" Route
+Consign "*" -- "1" ConsignPrice
+
+User "*" -- "1" UserRepository
+Accout "*" -- "1" AccountRepository
+Order "*" -- "1" OrderRepository
+Train "*" -- "1" TrainRepository
+Route "*" -- "1" RouteRepository
+QueryService ..> Trip
+QueryService ..> Route
+OrderService ..> Order
+OrderService ..> Seat
+PaymentService ..> Payment
+ConsignService ..> Consign
+FoodService ..> Food
+AdministrationService ..> User
+AdministrationService ..> Train
+
+enum AssuranceType {
+    VEHICLE
+    OTHERS
+}
+enum PaymentType {
+    D
+    P
+    O
+    E
+}
+@enduml

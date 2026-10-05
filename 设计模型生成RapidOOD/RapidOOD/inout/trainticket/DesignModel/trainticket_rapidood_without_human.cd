@@ -1,0 +1,117 @@
+@startuml
+' Candidate RapidOOD output without human intervention.
+' Rule-based initial model followed by LLM assessment/refactoring.
+
+class User
+class Accout
+class Contacts
+class Order
+class Train
+class Trip
+class Route
+class Station
+class Seat
+class Travel
+class Payment {
+    - Type : PaymentType
+}
+class Assurance {
+    - Type : AssuranceType
+}
+class Consign
+class Food
+class StationFoodStore
+class FoodDeliveryOrder
+class WaitListOrder
+class Price
+
+class UserRepository {
+    + findUser ( String condition ) : User
+    + updateUser ( User object ) : Boolean
+    + deleteUser ( User object ) : Boolean
+    + createUser ( ) : User
+}
+class AccountRepository {
+    + findAccout ( String condition ) : Accout
+    + updateAccout ( Accout object ) : Boolean
+    + deleteAccout ( Accout object ) : Boolean
+    + createAccout ( ) : Accout
+}
+class OrderRepository {
+    + findOrder ( String condition ) : Order
+    + updateOrder ( Order object ) : Boolean
+    + deleteOrder ( Order object ) : Boolean
+    + createOrder ( ) : Order
+}
+class TrainRepository {
+    + findTrain ( String condition ) : Train
+    + updateTrain ( Train object ) : Boolean
+    + deleteTrain ( Train object ) : Boolean
+    + createTrain ( ) : Train
+}
+class RouteRepository {
+    + findRoute ( String condition ) : Route
+    + updateRoute ( Route object ) : Route
+    + deleteRoute ( Route object ) : Boolean
+    + createRoute ( ) : Route
+}
+
+class TrainticketSystem {
+    + excuteOrder ( ) : Boolean
+    + queryForTravel ( Travel info ) : Boolean
+    + cancelTicket ( String orderId, String loginId ) : Boolean
+    + getPriceByWeightAndRegion ( ) : Boolean
+    + executeTicket ( ) : Boolean
+    + pay ( ) : Boolean
+    + drawBack ( ) : Boolean
+    + payDifference ( ) : Boolean
+    + orderCancelSuccess ( ) : Boolean
+    + preserveSuccess ( ) : Boolean
+    + orderCreateSuccess ( ) : Boolean
+    + orderChangedSuccess ( ) : Boolean
+    + preserve ( ) : Boolean
+    + securityInfoCheck ( ) : Boolean
+    + rebook ( ) : Boolean
+    + getCheapestRoutes ( ) : Boolean
+    + getQuickestRoutes ( ) : Boolean
+    + getMinStopRoutes ( ) : Boolean
+    + distributeSeat ( ) : Boolean
+    + getTransferResult ( ) : Boolean
+    + getByCheapest ( ) : Boolean
+    + getByQuickest ( ) : Boolean
+
+}
+
+User "1" -- "*" Accout
+Accout "1" -- "*" Contacts
+Accout "1" -- "*" Order
+Order "1" -- "*" Payment
+Order "1" -- "*" Assurance
+Order "1" -- "*" Consign
+Order "1" -- "*" Food
+Order "*" -- "1" Trip
+Trip "*" -- "1" Train
+Trip "*" -- "1" Route
+Route "1" -- "*" Station
+Train "1" -- "*" Seat
+StationFoodStore "1" -- "*" Food
+StationFoodStore "1" -- "*" FoodDeliveryOrder
+FoodDeliveryOrder "*" -- "1" Trip
+WaitListOrder "*" -- "1" Trip
+Accout "1" -- "*" WaitListOrder
+Price "*" -- "1" Route
+User "*" -- "1" UserRepository
+Accout "*" -- "1" AccountRepository
+Order "*" -- "1" OrderRepository
+
+enum AssuranceType {
+    VEHICLE
+    OTHERS
+}
+enum PaymentType {
+    D
+    P
+    O
+    E
+}
+@enduml

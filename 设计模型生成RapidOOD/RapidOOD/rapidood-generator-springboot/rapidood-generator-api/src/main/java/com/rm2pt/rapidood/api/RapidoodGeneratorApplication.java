@@ -1,0 +1,12 @@
+package com.rm2pt.rapidood.api;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class RapidoodGeneratorApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(RapidoodGeneratorApplication.class, args);
+    }
+}

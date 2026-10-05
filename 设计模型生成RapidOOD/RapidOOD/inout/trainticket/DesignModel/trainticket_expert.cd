@@ -1,0 +1,247 @@
+@startuml
+' Trainticket expert reference model
+' This model is an initial expert baseline for QMOOD comparison.
+' It uses the same anemic-domain style as the other expert models.
+
+class User {
+	- UserId : String
+	- UserName : String
+	- Password : String
+	- Email : String
+}
+class Accout {
+	- Id : String
+	- AccoutId : String
+	- LoginId : String
+	- Password : String
+	- Name : String
+	- Money : Real
+	- Email : String
+}
+class Contacts {
+	- Id : String
+	- AccountId : String
+	- Name : String
+	- DocumentNumber : String
+	- PhoneNumber : String
+}
+class Order {
+	- Id : String
+	- TravelDate : String
+	- TravelTime : String
+	- AccoutId : String
+	- ContactsName : String
+	- TrainNumber : String
+	- SeatClass : Integer
+	- SeatNumber : String
+	- From : String
+	- To : String
+	- Status : Integer
+	- Price : Real
+}
+class Train {
+	- Id : String
+	- Name : String
+	- EconomyClass : Integer
+	- ConfortClass : Integer
+	- AverageSpeed : Integer
+}
+class Trip {
+	- Id : String
+	- TrainName : String
+	- RouteId : String
+	- StartStationName : String
+	- TerminalStationName : String
+	- StartTime : String
+	- EndTime : String
+}
+class Route {
+	- Id : String
+	- Stations : Set
+	- Distances : Set
+	- StartStation : String
+	- EndStation : String
+}
+class Station {
+	- Id : String
+	- Name : String
+	- StayTime : Integer
+}
+class Seat {
+	- TravelDate : String
+	- TrainNumber : String
+	- StartStation : String
+	- DestStation : String
+	- SeatType : Integer
+}
+class Travel {
+	- StartPlace : String
+	- EndPlace : String
+	- DepartureTime : String
+}
+class Payment {
+	- Id : String
+	- OrderId : String
+	- UserId : String
+	- Price : Real
+	- Type : PaymentType
+}
+class Assurance {
+	- Id : String
+	- OrderId : String
+	- Type : AssuranceType
+}
+class Consign {
+	- Id : String
+	- OrderId : String
+	- AccoutId : String
+	- From : String
+	- To : String
+	- Consignee : String
+	- Phone : String
+	- Weight : Real
+	- IsWithin : Boolean
+}
+class Food {
+	- Id : String
+	- OrderId : String
+	- StationName : String
+	- StoreName : String
+	- FoodName : String
+	- Price : Real
+}
+class StationFoodStore {
+	- Id : String
+	- StationId : String
+	- StoreName : String
+	- Telephone : String
+	- BusinessTime : String
+	- DeliveryFee : Real
+}
+class WaitListOrder {
+	- Id : String
+	- TravelTime : String
+	- AccountId : String
+	- ContactsId : String
+	- ContactsName : String
+	- TrainNumber : String
+	- SeatType : Integer
+}
+class Price {
+	- Id : String
+	- TrainType : String
+	- RouteId : String
+	- BasicPriceRate : Real
+	- FirstClassPriceRate : Real
+}
+class Config {
+	- Name : String
+	- Value : String
+	- Description : String
+}
+
+class UserRepository {
+	+ findUser ( String condition ) : User
+	+ updateUser ( User object ) : Boolean
+	+ deleteUser ( User object ) : Boolean
+	+ createUser ( ) : User
+}
+class AccountRepository {
+	+ findAccout ( String condition ) : Accout
+	+ updateAccout ( Accout object ) : Boolean
+	+ deleteAccout ( Accout object ) : Boolean
+	+ createAccout ( ) : Accout
+}
+class OrderRepository {
+	+ findOrder ( String condition ) : Order
+	+ updateOrder ( Order object ) : Boolean
+	+ deleteOrder ( Order object ) : Boolean
+	+ createOrder ( ) : Order
+}
+class TrainRepository {
+	+ findTrain ( String condition ) : Train
+	+ updateTrain ( Train object ) : Boolean
+	+ deleteTrain ( Train object ) : Boolean
+	+ createTrain ( ) : Train
+}
+class RouteRepository {
+	+ findRoute ( String condition ) : Route
+	+ updateRoute ( Route object ) : Boolean
+	+ deleteRoute ( Route object ) : Boolean
+	+ createRoute ( ) : Route
+}
+
+class TrainticketSystem {
+	+ excuteOrder ( ) : Boolean
+	+ queryForTravel ( Travel info ) : Boolean
+	+ cancelTicket ( String orderId, String loginId ) : Boolean
+	+ getPriceByWeightAndRegion ( ) : Boolean
+	+ executeTicket ( ) : Boolean
+	+ pay ( ) : Boolean
+	+ drawBack ( ) : Boolean
+	+ payDifference ( ) : Boolean
+	+ orderCancelSuccess ( ) : Boolean
+	+ preserveSuccess ( ) : Boolean
+	+ orderCreateSuccess ( ) : Boolean
+	+ orderChangedSuccess ( ) : Boolean
+	+ preserve ( ) : Boolean
+	+ securityInfoCheck ( ) : Boolean
+	+ rebook ( ) : Boolean
+	+ getCheapestRoutes ( ) : Boolean
+	+ getQuickestRoutes ( ) : Boolean
+	+ getMinStopRoutes ( ) : Boolean
+	+ distributeSeat ( ) : Boolean
+	+ getLeftTicketOfInterval ( ) : Boolean
+	+ getTransferResult ( ) : Boolean
+	+ getByCheapest ( ) : Boolean
+	+ getByQuickest ( ) : Boolean
+	+ getByMinStation ( ) : Boolean
+}
+
+' Domain associations
+User "1" -- "*" Accout : owns
+Accout "1" -- "*" Contacts : manages
+Accout "1" -- "*" Order : places
+Order "1" -- "*" Payment
+Order "1" -- "*" Assurance
+Order "1" -- "*" Consign
+Order "1" -- "*" Food
+Order "*" -- "1" Trip
+Trip "*" -- "1" Train
+Trip "*" -- "1" Route
+Route "1" -- "*" Station
+Train "1" -- "*" Seat
+StationFoodStore "1" -- "*" Food
+Accout "1" -- "*" WaitListOrder
+WaitListOrder "*" -- "1" Trip
+Price "*" -- "1" Route
+
+' Persistence associations
+User "*" -- "1" UserRepository
+Accout "*" -- "1" AccountRepository
+Order "*" -- "1" OrderRepository
+Train "*" -- "1" TrainRepository
+Route "*" -- "1" RouteRepository
+
+' Service dependencies
+TrainticketSystem ..> User
+TrainticketSystem ..> Accout
+TrainticketSystem ..> Order
+TrainticketSystem ..> Train
+TrainticketSystem ..> Trip
+TrainticketSystem ..> Route
+TrainticketSystem ..> Payment
+TrainticketSystem ..> Consign
+TrainticketSystem ..> Food
+
+enum AssuranceType {
+	VEHICLE
+	OTHERS
+}
+enum PaymentType {
+	D
+	P
+	O
+	E
+}
+@enduml

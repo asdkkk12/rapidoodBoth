@@ -1,0 +1,59 @@
+@startuml
+class Store {
+	Id : void
+	Name : void
+	Address : void
+	IsOpened : void
+}
+class ProductCatalog {
+	Id : void
+	Name : void
+}
+class CashDesk {
+	Id : void
+	Name : void
+	IsOpened : void
+}
+class Sale {
+	IsComplete : void
+	Amount : void
+	IsReadytoPay : void
+}
+class Cashier {
+	Id : void
+	Name : void
+}
+class SalesLineItem {
+	Quantity : void
+	Subamount : void
+}
+class Item {
+	Barcode : void
+	Name : void
+	Price : void
+	StockNumber : void
+	OrderPrice : void
+}
+class Payment {
+	AmountTendered : void
+}
+class CashPayment {
+	Balance : void
+}
+class CardPayment {
+	CardAccountNumber : void
+}
+class OrderEntry {
+	Quantity : void
+	SubAmount : void
+}
+class Supplier {
+	Id : void
+	Name : void
+}
+class OrderProduct {
+	Id : void
+	Time : void
+	Amount : void
+}
+@enduml

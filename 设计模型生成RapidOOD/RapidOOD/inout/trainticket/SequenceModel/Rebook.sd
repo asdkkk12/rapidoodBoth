@@ -1,0 +1,27 @@
+@startuml
+participant Customer
+participant RebookService
+
+Customer -> RebookService : "getOrder"
+RebookService --> Customer : "getOrder return"
+Customer -> RebookService : "getTrip"
+RebookService --> Customer : "getTrip return"
+Customer -> RebookService : "payDifference"
+RebookService --> Customer : "payDifference return"
+Customer -> RebookService : "modifyNewOder"
+RebookService --> Customer : "modifyNewOder return"
+Customer -> RebookService : "setNewRoute"
+RebookService --> Customer : "setNewRoute return"
+Customer -> RebookService : "setNewTrain"
+RebookService --> Customer : "setNewTrain return"
+Customer -> RebookService : "setNewSeat"
+RebookService --> Customer : "setNewSeat return"
+
+RebookService -> RebookService : "[Definition] order = Order.allInstance()"
+RebookService -> RebookService : "[Definition] travels = Travel.allInstance()"
+RebookService -> RebookService : "[Postcondition] distributeSeat()"
+RebookService -> RebookService : "[Postcondition] payDifference()"
+RebookService -> RebookService : "[Postcondition] order_changed_success()"
+RebookService -> RebookService : "[Postcondition] result = true"
+
+@enduml

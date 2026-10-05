@@ -1,0 +1,1054 @@
+MicroServiceModel Trainticket {
+	MicroService CustomerService {
+		ProvidedInterface cancelTicket{
+			[Operation]
+			cancelTicket
+			CallChain cancelTicket {
+				service  :  {
+					Message 1 to EmailService {
+						operation drawbackMoney
+					}
+				}
+				service EmailService : EmailService {
+					Message 2 {
+						operation order_cancel_success
+					}
+				}
+			}
+		}
+		ProvidedInterface getQuickestRoutes{
+			[Operation]
+			getQuickestRoutes
+		}
+		ProvidedInterface getTransferResult{
+			[Operation]
+			getTransferResult
+		}
+		ProvidedInterface payDifference{
+			[Operation]
+			payDifference
+		}
+		ProvidedInterface createAccout{
+			[Operation]
+			createAccout
+		}
+		ProvidedInterface getByQuickestTravel{
+			[Operation]
+			getByQuickestTravel
+		}
+		ProvidedInterface getMinStopStations{
+			[Operation]
+			getMinStopStations
+		}
+		ProvidedInterface getTrainFood{
+			[Operation]
+			getTrainFood
+		}
+		ProvidedInterface pay{
+			[Operation]
+			pay
+		}
+		ProvidedInterface preserve{
+			[Operation]
+			preserve
+			CallChain preserve {
+				service AdminService : AdminService {
+					Message 1 to AdminService {
+						operation securityInfoCheck
+					}
+				}
+				service AdminService : AdminService {
+					Message 2 to TrainStaffService {
+						operation distributeSeat
+					}
+				}
+				service TrainStaffService : TrainStaffService {
+					Message 3 to AdminService {
+						operation manageFood
+					}
+				}
+				service AdminService : AdminService {
+					Message 4 to EmailService {
+						operation manageConsign
+					}
+				}
+				service EmailService : EmailService {
+					Message 5 {
+						operation order_create_success
+					}
+				}
+			}
+		}
+		ProvidedInterface getByCheapestTravel{
+			[Operation]
+			getByCheapestTravel
+		}
+		ProvidedInterface getByMinStation{
+			[Operation]
+			getByMinStation
+			CallChain getByMinStation {
+				service  :  {
+					Message 1 {
+						operation getMinStopRoutes
+					}
+				}
+			}
+		}
+		ProvidedInterface getLeftTicketOfInterval{
+			[Operation]
+			getLeftTicketOfInterval
+		}
+		ProvidedInterface getCheapestRoutes{
+			[Operation]
+			getCheapestRoutes
+		}
+		ProvidedInterface addMoney{
+			[Operation]
+			addMoney
+		}
+		ProvidedInterface queryForTravel{
+			[Operation]
+			queryForTravel
+		}
+		ProvidedInterface rebook{
+			[Operation]
+			rebook
+			CallChain rebook {
+				service AdminService : AdminService {
+					Message 1 to EmailService {
+						operation distributeSeat
+					}
+				}
+				service EmailService : EmailService {
+					Message 2 {
+						operation order_changed_success
+					}
+				}
+			}
+		}
+		ProvidedInterface getPriceByWeightAndRegion{
+			[Operation]
+			getPriceByWeightAndRegion
+		}
+		ProvidedInterface getFoodStores{
+			[Operation]
+			getFoodStores
+		}
+		ProvidedInterface drawBack{
+			[Operation]
+			drawBack
+		}
+		ProvidedInterface executeTicket{
+			[Operation]
+			executeTicket
+			CallChain executeTicket {
+				service  :  {
+					Message 1 {
+						operation excuteOrder
+					}
+				}
+			}
+		}
+		ProvidedInterface managePriceInfo{
+			[Operation]
+			createPriceInfo
+			queryPriceInfo
+			updatePriceInfo
+			modifyPriceInfo
+		}
+		ProvidedInterface manageAssurance{
+			[Operation]
+			createAssurance
+			queryAssurance
+			updateAssurance
+			modifyAssurance
+		}
+		ProvidedInterface manageTripResponse{
+			[Operation]
+			createTripResponse
+			queryTripResponse
+			updateTripResponse
+			modifyTripResponse
+		}
+		ProvidedInterface manageOrder{
+			[Operation]
+			createOrder
+			queryOrder
+			updateOrder
+			modifyOrder
+		}
+		ProvidedInterface manageBalance{
+			[Operation]
+			createBalance
+			queryBalance
+			updateBalance
+			modifyBalance
+		}
+		ProvidedInterface manageTripId{
+			[Operation]
+			createTripId
+			queryTripId
+			updateTripId
+			modifyTripId
+		}
+		RequiredInterface manageAssuranceTypeBean
+		RequiredInterface managePlainAssurance
+		RequiredInterface manageUser
+		RequiredInterface manageOrderInfo
+		RequiredInterface manageFood
+		RequiredInterface manageAccout
+		RequiredInterface manageTrain
+		RequiredInterface manageRoute
+		RequiredInterface manageTrip
+		RequiredInterface manageConsignRecord
+		RequiredInterface drawbackMoney 
+		RequiredInterface order_cancel_success 
+		RequiredInterface excuteOrder 
+		RequiredInterface securityInfoCheck 
+		RequiredInterface distributeSeat 
+		RequiredInterface manageConsign
+		RequiredInterface order_create_success 
+		RequiredInterface order_changed_success 
+		RequiredInterface getMinStopRoutes 
+		DomainModel CustomerService {
+			@AutoCRUD Entity Assurance {
+				Id : String
+				OrderId : String
+				Type : Integer
+				[Refer]
+			}
+			 Entity TripId {
+				Type : Integer
+				Number : String
+				[Refer]
+			}
+			@AutoCRUD Entity Order {
+				Id : String
+				BoughtData : String
+				TravelDate : String
+				TravelTime : String
+				AccoutId : String
+				ContactsName : String
+				DocumentType : Integer
+				ContactsDocumentNumber : String
+				TrainNumber : String
+				CoachNumber : Integer
+				SeatClass : Integer
+				SeatNumber : String
+				From : String
+				To : String
+				Status : Integer
+				Price : String
+				[Refer]
+				AlterInfo : OrderAlterInfo  Association
+			}
+			 Entity TravelAdvanceResultUnit {
+				TripId : String
+				TrainType : String
+				StartStation : String
+				EndStation : String
+				StopStations : Set<String>
+				PriceForSecondClassSet : String
+				NumberOfRestTicketSecondSeat : Integer
+				StartTime : String
+				EndTime : String
+				[Refer]
+			}
+			@AutoCRUD Entity TrainFood {
+				Id : String
+				TripId : String
+				FoodList : Set<Food>
+				[Refer]
+			}
+			 Entity Balance {
+				UserId : String
+				Balance : String
+				[Refer]
+			}
+			@AutoCRUD Entity OrderAlterInfo {
+				AccoutId : String
+				PreviousOrderId : String
+				LoginToken : String
+				NewOrderInfo : Order
+				[Refer]
+				NewOrderInfo : Order  Association
+			}
+			 Entity PriceInfo {
+				Id : String
+				TrainType : String
+				RouteId : String
+				BasicPriceRate : Real
+				FirstClassPriceRate : Real
+				[Refer]
+			}
+			 Entity TripAllDetail {
+				Status : Boolean
+				Message : String
+				TripResponse : TripResponse
+				Trip : Trip
+				[Refer]
+				TripResponse : TripResponse  Association
+			}
+			 Entity TripResponse {
+				TripId : TripId
+				TrainName : String
+				RouteId : String
+				StartStationName : String
+				StationsName : String
+				TerminalStationName : String
+				StartTime : String
+				EndTime : String
+				EconomyClass : Integer
+				ConfortClass : Integer
+				PriceForEconomyClass : String
+				PriceForConfortClass : String
+				[Refer]
+				TripId : TripId  Association
+			}
+			 Entity Travel {
+				Trip : Trip
+				StartPlace : String
+				EndPlace : String
+				DepartureTime : String
+				[Refer]
+			}
+			 Entity InsertConsignRecordResult {
+				Status : Boolean
+				Message : String
+				[Refer]
+			}
+		}
+	}
+	MicroService TrainStaffService {
+		ProvidedInterface manageFoodDelivery{
+			[Operation]
+			createFoodDelivery
+			queryFoodDelivery
+			updateFoodDelivery
+			modifyFoodDelivery
+		}
+		ProvidedInterface updateTripId{
+			[Operation]
+			updateTripId
+		}
+		ProvidedInterface updateSeatNo{
+			[Operation]
+			updateSeatNo
+		}
+		ProvidedInterface manageWaitListOrders{
+			[Operation]
+			createWaitListOrders
+			queryWaitListOrders
+			updateWaitListOrders
+			modifyWaitListOrders
+		}
+		ProvidedInterface updateDeliveryTime{
+			[Operation]
+			updateDeliveryTime
+		}
+		ProvidedInterface manageStation{
+			[Operation]
+			createStation
+			queryStation
+			updateStation
+			modifyStation
+		}
+		ProvidedInterface manageConsignRecord{
+			[Operation]
+			createConsignRecord
+			queryConsignRecord
+			updateConsignRecord
+			modifyConsignRecord
+		}
+		ProvidedInterface manageFood{
+			[Operation]
+			createFood
+			queryFood
+			updateFood
+			modifyFood
+		}
+		RequiredInterface manageConsign
+		RequiredInterface manageOrder
+		RequiredInterface manageAccout
+		RequiredInterface manageTrain
+		RequiredInterface manageSeat
+		RequiredInterface manageUser
+		RequiredInterface manageTrip
+		DomainModel TrainStaffService {
+			@AutoCRUD Entity ConsignRecord {
+				Id : String
+				OrderId : String
+				HandleDate : String
+				TargetDate : String
+				From : String
+				To : String
+				Consignee : String
+				Phone : String
+				Weight : Real
+				IsWithin : Boolean
+				[Refer]
+			}
+			 Entity GetOrderByIdInfo {
+				OrderId : String
+				[Refer]
+			}
+			 Entity StationFoodStore {
+				Id : String
+				StationId : String
+				StoreName : String
+				Telephone : String
+				BusinessTime : String
+				DeliveryFee : Real
+				FoodList : Set<Food>
+				[Refer]
+				Food : Food  Association
+			}
+			@AutoCRUD Entity Station {
+				Id : String
+				Name : String
+				StayTime : Integer
+				[Refer]
+			}
+			@AutoCRUD Entity FoodDeliveryOrder {
+				Id : String
+				StationFoodStoreId : String
+				FoodList : Set<Food>
+				TripId : String
+				SeatNo : Integer
+				CreatedTime : String
+				DeliveryTime : String
+				DeliveryFee : String
+				[Refer]
+				Food : Food  Association
+			}
+			 Entity WaitListOrder {
+				Id : String
+				TravelTime : String
+				AccountId : String
+				ContactsId : String
+				ContactsName : String
+				ContactsDocumentType : Integer
+				ContactsDocumentNumber : String
+				TrainNumber : String
+				SeatType : Integer
+				[Refer]
+			}
+			 Entity TokenDto {
+				UserId : String
+				Username : String
+				Token : String
+				[Refer]
+			}
+			 Entity WaitListOrderVO {
+				AccoutId : String
+				ContactsId : String
+				TripId : String
+				SeatType : Integer
+				Time : String
+				From : String
+				To : String
+				Price : String
+				[Refer]
+			}
+			@AutoCRUD Entity Food {
+				Id : String
+				OrderId : String
+				FoodType : Integer
+				StationName : String
+				StoreName : String
+				FoodName : String
+				Price : Real
+				[Refer]
+			}
+			@AutoCRUD Entity NotifyInfo {
+				Id : String
+				SendStatus : Boolean
+				Email : String
+				OrderNumber : String
+				UserName : String
+				StartPlace : String
+				EndPlace : String
+				StartTime : String
+				Time : String
+				SeatClass : String
+				SeatNumber : String
+				Price : String
+				[Refer]
+			}
+			 Entity Mail {
+				MailFrom : String
+				MailTo : String
+				MailCc : String
+				MailBcc : String
+				MailSubject : String
+				MailContent : String
+				ContentType : String
+				Attachment : Set<String>
+				[Refer]
+			}
+		}
+	}
+	MicroService AdminService {
+		ProvidedInterface executeOrder{
+			[Operation]
+			executeOrder
+		}
+		ProvidedInterface managePayment{
+			[Operation]
+			createPayment
+			queryPayment
+			updatePayment
+			modifyPayment
+		}
+		ProvidedInterface manageTrain{
+			[Operation]
+			createTrain
+			queryTrain
+			updateTrain
+			modifyTrain
+		}
+		ProvidedInterface manageOrder{
+			[Operation]
+			createOrder
+			queryOrder
+			updateOrder
+			modifyOrder
+		}
+		ProvidedInterface manageSeat{
+			[Operation]
+			createSeat
+			querySeat
+			updateSeat
+			modifySeat
+		}
+		ProvidedInterface distributeSeat{
+			[Operation]
+			distributeSeat
+		}
+		ProvidedInterface manageAccout{
+			[Operation]
+			createAccout
+			queryAccout
+			updateAccout
+			modifyAccout
+		}
+		ProvidedInterface manageStation{
+			[Operation]
+			createStation
+			queryStation
+			updateStation
+			modifyStation
+		}
+		ProvidedInterface manageSecurityConfig{
+			[Operation]
+			createSecurityConfig
+			querySecurityConfig
+			updateSecurityConfig
+			modifySecurityConfig
+		}
+		ProvidedInterface manageRoute{
+			[Operation]
+			createRoute
+			queryRoute
+			updateRoute
+			modifyRoute
+		}
+		ProvidedInterface manageFood{
+			[Operation]
+			createFood
+			queryFood
+			updateFood
+			modifyFood
+		}
+		ProvidedInterface manageAssurance{
+			[Operation]
+			createAssurance
+			queryAssurance
+			updateAssurance
+			modifyAssurance
+		}
+		ProvidedInterface manageConfig{
+			[Operation]
+			createConfig
+			queryConfig
+			updateConfig
+			modifyConfig
+		}
+		ProvidedInterface manageTravel{
+			[Operation]
+			createTravel
+			queryTravel
+			updateTravel
+			modifyTravel
+		}
+		ProvidedInterface managePrice{
+			[Operation]
+			createPrice
+			queryPrice
+			updatePrice
+			modifyPrice
+		}
+		ProvidedInterface securityInfoCheck{
+			[Operation]
+			securityInfoCheck
+		}
+		ProvidedInterface manageUser{
+			[Operation]
+			createUser
+			queryUser
+			updateUser
+			modifyUser
+		}
+		ProvidedInterface manageContacts{
+			[Operation]
+			createContacts
+			queryContacts
+			updateContacts
+			modifyContacts
+		}
+		ProvidedInterface manageDeliveryInfo{
+			[Operation]
+			createDeliveryInfo
+			queryDeliveryInfo
+			updateDeliveryInfo
+			modifyDeliveryInfo
+		}
+		ProvidedInterface manageConsign{
+			[Operation]
+			createConsign
+			queryConsign
+			updateConsign
+			modifyConsign
+		}
+		RequiredInterface manageDelivery
+		RequiredInterface manageRouteInfo
+		RequiredInterface manageTrip
+		RequiredInterface manageTrain
+		RequiredInterface manageStation
+		RequiredInterface manageSeat
+		RequiredInterface managePriceInfo
+		RequiredInterface manageAccout
+		RequiredInterface manageAssurance
+		RequiredInterface manageConsignPrice
+		RequiredInterface manageConsignRecord
+		DomainModel AdminService {
+			@AutoCRUD Entity PriceConfig {
+				Id : String
+				TrainType : String
+				RouteId : String
+				BasicPriceRate : Real
+				FirstClassPriceRate : Real
+				[Refer]
+			}
+			 Entity DeliveryInfo {
+				OrderId : String
+				DeliveryTime : String
+				[Refer]
+			}
+			@AutoCRUD Entity Route {
+				Id : String
+				Stations : Set<String>
+				Distances : Set<Integer>
+				StartStation : String
+				EndStation : String
+				[Refer]
+			}
+			 Entity TravelAdvanceResultInfo {
+				TripId : String
+				TrainTypeId : String
+				StartStation : String
+				EndStation : String
+				StopStations : Set<String>
+				PriceForSecondClassSeat : String
+				NumberOfRestTicketSecondClass : Integer
+				PriceForFirstClassSeat : String
+				NumberOfRestTicketFirstClass : Integer
+				StartTime : String
+				EndTime : String
+				[Refer]
+			}
+			@AutoCRUD Entity Price {
+				Id : String
+				TrainType : String
+				RouteId : String
+				BasicPriceRate : Real
+				FirstClassPriceRate : Real
+				[Refer]
+				Route : Route  Association
+			}
+			 Entity GetAccountByIdResult {
+				Status : Boolean
+				Message : String
+				Accout : Accout
+				[Refer]
+			}
+			@AutoCRUD Entity User {
+				UserId : String
+				UserName : String
+				Password : String
+				Roles : Set<String>
+				Gender : Integer
+				DocumentType : Integer
+				DocumentNum : String
+				Email : String
+				[Refer]
+			}
+			 Entity AdminTrip {
+				Trip : Trip
+				Train : Train
+				Route : Route
+				[Refer]
+			}
+			 Entity AuthDto {
+				UserId : String
+				Username : String
+				Password : String
+				[Refer]
+				BelongedUser : User  Association
+			}
+			 Entity GetPriceDomain {
+				Weight : Real
+				IsWithinRegion : Boolean
+				[Refer]
+			}
+			@AutoCRUD Entity Consign {
+				Id : String
+				OrderId : String
+				AccoutId : String
+				HandleDate : String
+				TargetDate : String
+				From : String
+				To : String
+				Consignee : String
+				Phone : String
+				Weight : Real
+				IsWithin : Boolean
+				[Refer]
+			}
+			 Entity RebookInfo {
+				LoginId : String
+				OrderId : String
+				OldTripId : String
+				TripId : String
+				SeatType : Integer
+				Time : String
+				[Refer]
+			}
+		}
+	}
+	MicroService EmailService {
+		ProvidedInterface order_create_success{
+			[Operation]
+			order_create_success
+		}
+		ProvidedInterface order_changed_success{
+			[Operation]
+			order_changed_success
+		}
+		ProvidedInterface order_cancel_success{
+			[Operation]
+			order_cancel_success
+		}
+		ProvidedInterface preserve_success{
+			[Operation]
+			preserve_success
+		}
+		ProvidedInterface manageRouteInfo{
+			[Operation]
+			createRouteInfo
+			queryRouteInfo
+			updateRouteInfo
+			modifyRouteInfo
+		}
+		ProvidedInterface manageTrip{
+			[Operation]
+			createTrip
+			queryTrip
+			updateTrip
+			modifyTrip
+		}
+		ProvidedInterface manageAccout{
+			[Operation]
+			createAccout
+			queryAccout
+			updateAccout
+			modifyAccout
+		}
+		ProvidedInterface manageConsignPrice{
+			[Operation]
+			createConsignPrice
+			queryConsignPrice
+			updateConsignPrice
+			modifyConsignPrice
+		}
+		ProvidedInterface managePayment{
+			[Operation]
+			createPayment
+			queryPayment
+			updatePayment
+			modifyPayment
+		}
+		RequiredInterface manageConsign
+		RequiredInterface manageOutsidePaymentInfo
+		RequiredInterface managePaymentInfo
+		RequiredInterface manageBalance
+		RequiredInterface manageTripId
+		RequiredInterface manageTrain
+		RequiredInterface manageRoute
+		RequiredInterface manageUser
+		DomainModel EmailService {
+			 Entity AllTripFood {
+				TrainFoodList : Set<Food>
+				FoodStoreList : Set<StationFoodStore>
+				[Refer]
+			}
+			 Entity RouteInfo {
+				Id : String
+				StationList : String
+				DistanceList : Integer
+				StartStation : String
+				EndStation : String
+				[Refer]
+			}
+			@AutoCRUD Entity ConsignPrice {
+				Id : String
+				Index : Integer
+				InitialWeight : Real
+				InitialPrice : Real
+				WithinPrice : Real
+				BeyondPrice : Real
+				[Refer]
+			}
+			@AutoCRUD Entity Payment {
+				Id : String
+				OrderId : String
+				UserId : String
+				Price : String
+				Type : Integer
+				[Refer]
+			}
+			 Entity GetAccountByIdInfo {
+				AccoutId : String
+				[Refer]
+				Accout : Accout  Association
+			}
+			@AutoCRUD Entity Accout {
+				Id : String
+				AccoutId : String
+				LoginId : String
+				Password : String
+				Gender : String
+				Name : String
+				Money : String
+				DocumentType : Integer
+				DocumentNum : String
+				Email : String
+				[Refer]
+			}
+			 Entity TripOrderInfo {
+				OrderId : String
+				TripId : String
+				[Refer]
+			}
+			@AutoCRUD Entity SecurityConfig {
+				Id : String
+				Name : String
+				Value : String
+				Description : String
+				[Refer]
+			}
+			@AutoCRUD Entity Trip {
+				Id : String
+				TripId : TripId
+				TrainName : String
+				RouteId : String
+				StartStationName : String
+				StationsName : String
+				TerminalStationName : String
+				StartTime : String
+				EndTime : String
+				[Refer]
+			}
+			 Entity BasicAuthDto {
+				Username : String
+				Password : String
+				VerficationCode : String
+				[Refer]
+			}
+			@AutoCRUD Entity Contacts {
+				Id : String
+				AccountId : String
+				Name : String
+				DocumentNumber : String
+				PhoneNumber : String
+				[Refer]
+			}
+		}
+	}
+	MicroService WorkerService {
+		ProvidedInterface manageConsign{
+			[Operation]
+			createConsign
+			queryConsign
+			updateConsign
+			modifyConsign
+		}
+		ProvidedInterface manageConsignPrice{
+			[Operation]
+			createConsignPrice
+			queryConsignPrice
+			updateConsignPrice
+			modifyConsignPrice
+		}
+		ProvidedInterface manageDelivery{
+			[Operation]
+			createDelivery
+			queryDelivery
+			updateDelivery
+			modifyDelivery
+		}
+		ProvidedInterface manageTrain{
+			[Operation]
+			createTrain
+			queryTrain
+			updateTrain
+			modifyTrain
+		}
+		ProvidedInterface manageSeat{
+			[Operation]
+			createSeat
+			querySeat
+			updateSeat
+			modifySeat
+		}
+		ProvidedInterface manageAssuranceTypeBean{
+			[Operation]
+			createAssuranceTypeBean
+			queryAssuranceTypeBean
+			updateAssuranceTypeBean
+			modifyAssuranceTypeBean
+		}
+		ProvidedInterface managePlainAssurance{
+			[Operation]
+			createPlainAssurance
+			queryPlainAssurance
+			updatePlainAssurance
+			modifyPlainAssurance
+		}
+		ProvidedInterface manageOrderInfo{
+			[Operation]
+			createOrderInfo
+			queryOrderInfo
+			updateOrderInfo
+			modifyOrderInfo
+		}
+		ProvidedInterface manageOutsidePaymentInfo{
+			[Operation]
+			createOutsidePaymentInfo
+			queryOutsidePaymentInfo
+			updateOutsidePaymentInfo
+			modifyOutsidePaymentInfo
+		}
+		ProvidedInterface managePaymentInfo{
+			[Operation]
+			createPaymentInfo
+			queryPaymentInfo
+			updatePaymentInfo
+			modifyPaymentInfo
+		}
+		RequiredInterface manageStation
+		RequiredInterface managePayment
+		RequiredInterface manageTripResponse
+		RequiredInterface manageOrder
+		RequiredInterface manageDeliveryInfo
+		DomainModel WorkerService {
+			@AutoCRUD Entity Seat {
+				TravelDate : String
+				TrainNumber : String
+				StartStation : String
+				DestStation : String
+				SeatType : Integer
+				Stations : Set<String>
+				[Refer]
+			}
+			 Entity SeatInfo {
+				OrderId : String
+				SeatNo : Integer
+				[Refer]
+			}
+			 Entity PaymentInfo {
+				UserId : String
+				OrderId : String
+				TripId : String
+				Price : String
+				[Refer]
+			}
+			 Entity OutsidePaymentInfo {
+				OrderId : String
+				Price : String
+				UserId : String
+				[Refer]
+			}
+			 Entity TransferTravelResult {
+				FirstSectionResult : Set<TripResponse>
+				SecondSectionResult : Set<TripResponse>
+				[Refer]
+			}
+			@AutoCRUD Entity Train {
+				Id : String
+				Name : String
+				EconomyClass : Integer
+				ConfortClass : Integer
+				AverageSpeed : Integer
+				[Refer]
+			}
+			@AutoCRUD Entity Config {
+				Name : String
+				Value : String
+				Description : String
+				[Refer]
+			}
+			@AutoCRUD Entity Money {
+				Id : String
+				UserId : String
+				Name : String
+				Type : Integer
+				[Refer]
+			}
+			 Entity AssuranceTypeBean {
+				Index : Integer
+				Name : String
+				Price : Real
+				[Refer]
+			}
+			@AutoCRUD Entity OrderInfo {
+				LoginId : String
+				TravelDateStart : String
+				TravelDateEnd : String
+				BoughtDateStart : String
+				BoughtDateEnd : String
+				State : Integer
+				EnableTravelDateQuery : Boolean
+				EnableBoughtDateQuery : Boolean
+				EnableStateQuery : Boolean
+				[Refer]
+			}
+			 Entity PlainAssurance {
+				Id : String
+				OrderId : String
+				TypeIndex : Integer
+				TypeName : String
+				TypePrice : Real
+				[Refer]
+			}
+			@AutoCRUD Entity Delivery {
+				Id : String
+				OrderId : String
+				FoodName : String
+				StoreName : String
+				StationName : String
+				[Refer]
+			}
+		}
+	}
+}

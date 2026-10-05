@@ -1,0 +1,25 @@
+@startuml
+participant Customer
+participant CancelTicketService
+
+Customer -> CancelTicketService : "queryOrder"
+CancelTicketService --> Customer : "queryOrder return"
+Customer -> CancelTicketService : "modifyOrder"
+CancelTicketService --> Customer : "modifyOrder return"
+Customer -> CancelTicketService : "caculate"
+CancelTicketService --> Customer : "caculate return"
+Customer -> CancelTicketService : "drawback"
+CancelTicketService --> Customer : "drawback return"
+Customer -> CancelTicketService : "queryUser"
+CancelTicketService --> Customer : "queryUser return"
+Customer -> CancelTicketService : "sendNotification"
+CancelTicketService --> Customer : "sendNotification return"
+
+CancelTicketService -> CancelTicketService : "[Definition] order = Order.allInstance()"
+CancelTicketService -> CancelTicketService : "[Definition] accout = Accout.allInstance()"
+CancelTicketService -> CancelTicketService : "[Postcondition] Order.allInstance()->excludes(order)"
+CancelTicketService -> CancelTicketService : "[Postcondition] drawbackMoney()"
+CancelTicketService -> CancelTicketService : "[Postcondition] order_cancel_success()"
+CancelTicketService -> CancelTicketService : "[Postcondition] result = true"
+
+@enduml

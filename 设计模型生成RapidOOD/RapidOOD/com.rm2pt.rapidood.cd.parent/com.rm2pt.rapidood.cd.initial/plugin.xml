@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+ <extension
+       point="org.eclipse.ui.menus">
+    <menuContribution
+          allPopups="false"
+          locationURI="popup:org.eclipse.ui.popup.any">
+       <menu
+             id="RM2PTFeatures"
+             label="RM2PT-Dev">
+          <command
+                commandId="com.rm2pt.rapidood.cd.commands.classdiagramgenerator"
+                label="Generate Class Diagram"
+                style="push">
+          </command>
+          <visibleWhen checkEnabled="true">
+             <or>
+                <reference
+                      definitionId="net.mydreamy.requirementmodel.REMODEL.Editor.opened">
+                </reference>
+                <iterate
+                      ifEmpty="false">
+                   <adapt
+                         type="org.eclipse.core.resources.IResource">
+                      <test
+                            property="org.eclipse.core.resources.name"
+                            value="*.remodel">
+                      </test>
+                   </adapt>
+                </iterate>
+                <iterate
+                      ifEmpty="false">
+                   <adapt
+                         type="org.eclipse.core.resources.IResource">
+                      <test
+                            property="org.eclipse.core.resources.name"
+                            value="*.xmi">
+                      </test>
+                   </adapt>
+                </iterate>
+             </or>
+          </visibleWhen>
+       </menu>
+    </menuContribution>
+ </extension>
+ 
+  <extension
+       point="org.eclipse.ui.commands">
+    <command
+          id="com.rm2pt.rapidood.cd.commands.classdiagramgenerator"
+          name="Generate Class Diagram">
+    </command>
+ </extension>
+ <extension
+       point="org.eclipse.ui.handlers">
+    <handler
+          class="com.rm2pt.rapidood.cd.initial.ClassDiagramGeneratorHandler"
+          commandId="com.rm2pt.rapidood.cd.commands.classdiagramgenerator">
+    </handler>
+ </extension>
+</plugin>
+	

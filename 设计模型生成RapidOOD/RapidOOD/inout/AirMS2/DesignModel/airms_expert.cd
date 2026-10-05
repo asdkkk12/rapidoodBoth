@@ -1,0 +1,239 @@
+@startuml
+' ===================== 领域实体类（15个）=====================
+class WorkReport {
+	- Id : Integer
+	- Name : String
+	- Content : String
+	- Time : Date
+}
+class WorkTask {
+	- Id : Integer
+	- StaffName : String
+	- AdminName : String
+	- Phone : String
+	- Section : String
+	- Remark : String
+}
+class TerminalEquipment {
+	- Id : Integer
+	- Name : String
+	- Address : String
+	- Description : String
+	- Type : Integer
+	- Remark : String
+}
+class OperationStatus {
+	- Id : Integer
+	- Remark : String
+	- Status : String
+	- Value : String
+	- ValueUnit : String
+	- Time : Date
+	- Name : String
+}
+class User {
+	- Id : Integer
+	- Name : String
+	- Password : String
+	- Phone : String
+}
+class Role {
+	- Id : Integer
+	- RoleCode : Integer
+	- Remark : String
+}
+class Department {
+	- Id : Integer
+	- Name : String
+	- ContactRerson : String
+	- Principal : String
+	- Phone : String
+	- BriefInfo : String
+	- DescribeContent : String
+	- Remark : String
+}
+class TbRepair {
+	- Id : Integer
+	- Repairname : String
+	- Phone : String
+	- Place : String
+	- RepairsStatus : Integer
+	- DeviceId : String
+	- Status : Integer
+	- DescribeContent : String
+	- Score : Integer
+	- Remark : String
+	- Time : Date
+}
+class TbRepairExtra {
+	- Id : Integer
+	- Admin : Boolean
+	- IsReject : Boolean
+	- RejectCause : String
+	- RelayNum : Integer
+	- Arbitrate : Boolean
+	- IsAccept : Boolean
+	- IsComplete : Boolean
+	- Time : Date
+	- Resolvent : String
+	- Cause : String
+}
+class ProcessingFees {
+	- Id : Integer
+	- ProjectName : String
+	- Price : Real
+	- Number : Integer
+	- TotalPrice : Real
+	- Remake : String
+}
+class DeviceInfo {
+	- Id : Integer
+	- Name : String
+	- Brand : String
+	- Type : String
+	- Address : String
+	- AdminName : String
+	- ContactsName : String
+	- Status : Integer
+	- Remark : String
+}
+class DeviceLocationGroup {
+	- Id : Integer
+	- Name : String
+	- Remark : String
+}
+class EquipmentFailureType {
+	- Id : Integer
+	- Name : String
+	- DescribeContent : String
+	- Remark : String
+}
+class DeviceStatus {
+	- Id : Integer
+	- Name : String
+	- Remark : String
+}
+class DeviceAssociationGroup {
+	- Id : Integer
+	- Name : String
+	- Remark : String
+}
+
+' ===================== 服务类（6个，来自 remodel Services）=====================
+class AirportSystem {
+	- Currentuser : User
+	- Currentrepair : TbRepair
+	+ createUser ( Integer id, String name, String password, String phone, Integer roleCode, Integer departmentid ) : Boolean
+	+ queryUser ( Integer id ) : User
+	+ modifyUser ( Integer id, String name, String password, String phone, Integer roleCode, Integer departmentid ) : Boolean
+	+ deleteUser ( Integer id ) : Boolean
+	+ createDeviceStatus ( Integer id, String name, String remark ) : Boolean
+	+ queryDeviceStatus ( Integer id ) : DeviceStatus
+	+ modifyDeviceStatus ( Integer id, String name, String remark ) : Boolean
+	+ deleteDeviceStatus ( Integer id ) : Boolean
+	+ createDepartment ( Integer id, String name, String contactRerson, String principal, String phone, String briefInfo, String describeContent, String remark ) : Boolean
+	+ queryDepartment ( Integer id ) : Department
+	+ modifyDepartment ( Integer id, String name, String contactRerson, String principal, String phone, String briefInfo, String describeContent, String remark ) : Boolean
+	+ deleteDepartment ( Integer id ) : Boolean
+	+ createDeviceAssociationGroup ( Integer id, String name, String remark ) : Boolean
+	+ queryDeviceAssociationGroup ( Integer id ) : DeviceAssociationGroup
+	+ modifyDeviceAssociationGroup ( Integer id, String name, String remark ) : Boolean
+	+ deleteDeviceAssociationGroup ( Integer id ) : Boolean
+	+ createRole ( Integer id, String remark, Integer roleCode ) : Boolean
+	+ queryRole ( Integer id ) : Role
+	+ modifyRole ( Integer id, String remark, Integer roleCode ) : Boolean
+	+ deleteRole ( Integer id ) : Boolean
+	+ createEquipmentFailureType ( Integer id, String name, String describeContent, String remark ) : Boolean
+	+ queryEquipmentFailureType ( Integer id ) : EquipmentFailureType
+	+ modifyEquipmentFailureType ( Integer id, String name, String describeContent, String remark ) : Boolean
+	+ deleteEquipmentFailureType ( Integer id ) : Boolean
+	+ createDeviceInfo ( Integer id, String name, String brand, String type, String address, String adminName, String contactsName, String remark ) : Boolean
+	+ queryDeviceInfo ( Integer id ) : DeviceInfo
+	+ modifyDeviceInfo ( Integer id, String name, String brand, String type, String address, String adminName, String contactsName, String remark ) : Boolean
+	+ deleteDeviceInfo ( Integer id ) : Boolean
+	+ createDeviceLocationGroup ( Integer id, String name, String remark ) : Boolean
+	+ queryDeviceLocationGroup ( Integer id ) : DeviceLocationGroup
+	+ modifyDeviceLocationGroup ( Integer id, String name, String remark ) : Boolean
+	+ deleteDeviceLocationGroup ( Integer id ) : Boolean
+}
+class RoutineService {
+	+ userLogin ( String name, String password ) : Boolean
+	+ workReportSubmit ( String name, String content, String section, String remark ) : Boolean
+}
+class RepairService {
+	+ submitRepair ( Integer departmentid, Integer assignDepartId, String repairname, String phone, String place, Integer repairsStatus, String deviceId, String describeContent, Integer failureTypeId ) : Boolean
+	+ notAcceptAa ( ) : Set
+	+ acceptedAa ( ) : Set
+	+ completedAa ( ) : Set
+	+ tbInfo ( Integer id ) : TbRepair
+	+ scoring ( Integer tbid, Integer score, String remark ) : Boolean
+	+ sendVoice ( ) : Boolean
+	+ pushInfo ( ) : Boolean
+	+ savePwd ( ) : Boolean
+}
+class HandleService {
+	+ notAcceptBa ( ) : Set
+	+ acceptedBa ( ) : Set
+	+ completedBa ( ) : Set
+	+ allocation ( Integer userId, Integer tbId ) : Boolean
+	+ transmit ( Integer departId, Integer tbId ) : Boolean
+	+ backtransmit ( Integer tbId, String rejectCause ) : Boolean
+	+ setWorkTask ( String staffName, String adminName, String phone, String section, String remark ) : Boolean
+	+ setTerminalEquipment ( String name, String address, String description, Integer type, String remark, Integer deviceInfoId ) : Boolean
+}
+class MaintainService {
+	+ receiveTb ( Integer tbId ) : Boolean
+	+ completeTb ( Integer tbId, String cause, String resolvent ) : Boolean
+	+ rocessingFees ( Integer tbId, String projectName, Real price, Integer number, String remake ) : Boolean
+	+ setOperationStatus ( String name, String value, String valueUnit, String status, String remark, Integer equipmentId ) : Boolean
+}
+class ManageService {
+	+ approval ( Integer tbId, Boolean isApproved ) : Boolean
+	+ arbitration ( Integer tbId, Integer departmentid ) : Boolean
+}
+
+' ===================== 实体-实体关联（17条，与 airms.cd 相同）=====================
+TerminalEquipment--"BelongedDeviceInfo: 1" DeviceInfo
+OperationStatus--"BelongedEquipment: 1" TerminalEquipment
+User "ContainedUsers: *"--"BelongedRole: 1" Role
+User--"BelongedDepartment: 1" Department
+TbRepair--"BelongedUser: 1" User
+TbRepair--"BelongedDepartment: 1" Department
+TbRepair "BelongedTbRepair: 1"--"AssoicatedTRE: 1" TbRepairExtra
+TbRepair--"BelongedEFT: 1" EquipmentFailureType
+TbRepairExtra--"BelongedAssignDepart: 1" Department
+TbRepairExtra--"BelongedDistribution: 1" User
+TbRepairExtra--"BelongedRelayDep: 1" Department
+ProcessingFees--"BelongedTbRepair: 1" TbRepair
+DeviceInfo--"BelongedDLG: 1" DeviceLocationGroup
+DeviceInfo--"BelongedEFT: 1" EquipmentFailureType
+DeviceInfo--"BelongedDAG: 1" DeviceAssociationGroup
+DeviceInfo--"BelongedDepartment: 1" Department
+EquipmentFailureType--"BelongedDepartment: 1" Department
+
+' ===================== 服务-实体关联（24条）=====================
+AirportSystem--User
+AirportSystem--Role
+AirportSystem--Department
+AirportSystem--DeviceInfo
+AirportSystem--DeviceStatus
+AirportSystem--DeviceLocationGroup
+AirportSystem--DeviceAssociationGroup
+AirportSystem--EquipmentFailureType
+RoutineService--User
+RoutineService--WorkReport
+RepairService--TbRepair
+RepairService--Department
+RepairService--EquipmentFailureType
+HandleService--TbRepairExtra
+HandleService--Department
+HandleService--User
+HandleService--WorkTask
+HandleService--TerminalEquipment
+HandleService--DeviceInfo
+MaintainService--TbRepairExtra
+MaintainService--ProcessingFees
+MaintainService--OperationStatus
+ManageService--TbRepairExtra
+ManageService--TbRepair
+@enduml

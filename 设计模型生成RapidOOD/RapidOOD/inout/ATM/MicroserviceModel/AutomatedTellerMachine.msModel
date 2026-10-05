@@ -1,0 +1,63 @@
+MicroServiceModel AutomatedTellerMachine {
+	MicroService CustomerService {
+		ProvidedInterface depositFunds{
+			[Operation]
+			depositFunds
+		}
+		ProvidedInterface withdrawCash{
+			[Operation]
+			withdrawCash
+		}
+		ProvidedInterface cardIdentification{
+			[Operation]
+			cardIdentification
+		}
+		ProvidedInterface checkBalance{
+			[Operation]
+			checkBalance
+		}
+		ProvidedInterface manageUser{
+			[Operation]
+			createUser
+			queryUser
+			updateUser
+			modifyUser
+		}
+		RequiredInterface manageBankCard
+		DomainModel CustomerService {
+			@AutoCRUD Entity User {
+				UserID : Integer
+				Name : String
+				Address : String
+				[Refer]
+			}
+		}
+	}
+	MicroService BankClerkService {
+		ProvidedInterface manageBankCard{
+			[Operation]
+			createBankCard
+			queryBankCard
+			updateBankCard
+			modifyBankCard
+		}
+		ProvidedInterface manageUser{
+			[Operation]
+			createUser
+			queryUser
+			updateUser
+			modifyUser
+		}
+		RequiredInterface manageUser
+		DomainModel BankClerkService {
+			@AutoCRUD Entity BankCard {
+				CardID : Integer
+				CardStatus : Integer
+				Catalog : Integer
+				Password : Integer
+				Balance : Real
+				[Refer]
+			}
+		}
+	}
+}

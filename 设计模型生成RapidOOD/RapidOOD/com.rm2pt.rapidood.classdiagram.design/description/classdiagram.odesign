@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="classdiagram" version="12.0.0.2017041100">
+  <ownedViewpoints name="ClassDiagram">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Class Diagram" domainClass="classDiagram::ClassDiagram" enablePopupBars="true">
+      <metamodel href="../../com.rm2pt.rapidood.cd/model/generated/ClassDiagram.ecore#/"/>
+      <defaultLayer name="Default">
+        <edgeMappings name="Relationship" semanticCandidatesExpression="aql:self.elements" sourceMapping="//@ownedViewpoints[name='ClassDiagram']/@ownedRepresentations[name='Class%20Diagram']/@defaultLayer/@containerMappings[name='Package']/@subContainerMappings[name='Class'] //@ownedViewpoints[name='ClassDiagram']/@ownedRepresentations[name='Class%20Diagram']/@defaultLayer/@containerMappings[name='Class'] //@ownedViewpoints[name='ClassDiagram']/@ownedRepresentations[name='Class%20Diagram']/@defaultLayer/@containerMappings[name='Package']/@subContainerMappings[name='Package']/@subContainerMappings[name='Class']" targetMapping="//@ownedViewpoints[name='ClassDiagram']/@ownedRepresentations[name='Class%20Diagram']/@defaultLayer/@containerMappings[name='Package']/@subContainerMappings[name='Class'] //@ownedViewpoints[name='ClassDiagram']/@ownedRepresentations[name='Class%20Diagram']/@defaultLayer/@containerMappings[name='Class'] //@ownedViewpoints[name='ClassDiagram']/@ownedRepresentations[name='Class%20Diagram']/@defaultLayer/@containerMappings[name='Package']/@subContainerMappings[name='Package']/@subContainerMappings[name='Class']" targetFinderExpression="aql:self.right" sourceFinderExpression="aql:self.left" targetExpression="var:self" domainClass="classDiagram::Relationship" useDomainElement="true">
+          <style targetArrow="NoDecoration" sizeComputationExpression="2" routingStyle="manhattan">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <beginLabelStyleDescription labelSize="11" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </beginLabelStyleDescription>
+            <centerLabelStyleDescription labelSize="11" showIcon="false" labelExpression="aql:self.label">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+            <endLabelStyleDescription labelSize="11" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </endLabelStyleDescription>
+          </style>
+          <conditionnalStyles predicateExpression="aql:self.leftDecorator='&lt;|' and (self.line='-' or self.line='--')">
+            <style sourceArrow="InputClosedArrow" targetArrow="NoDecoration" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.leftDecorator='&lt;|' and (self.line='.' or self.line='..')">
+            <style lineStyle="dash" sourceArrow="InputClosedArrow" targetArrow="NoDecoration" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.rightDecorator='|>' and (self.line='-' or self.line='--')">
+            <style targetArrow="InputClosedArrow" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.rightDecorator='|>' and (self.line='.' or self.line='..')">
+            <style lineStyle="dash" targetArrow="InputClosedArrow" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.leftDecorator='&lt;' and (self.line='-' or self.line='--')">
+            <style sourceArrow="InputArrow" targetArrow="NoDecoration" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.leftDecorator='&lt;' and (self.line='.' or self.line='..')">
+            <style lineStyle="dash" sourceArrow="InputArrow" targetArrow="NoDecoration" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.rightDecorator='>' and (self.line='-' or self.line='--')">
+            <style sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.rightDecorator='&lt;' and (self.line='.' or self.line='..')">
+            <style lineStyle="dash" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.leftDecorator='o' and (self.line='-' or self.line='--')">
+            <style sourceArrow="Diamond" targetArrow="NoDecoration" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.leftDecorator='o' and (self.line='.' or self.line='..')">
+            <style lineStyle="dash" sourceArrow="Diamond" targetArrow="NoDecoration" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.rightDecorator='o' and (self.line='-' or self.line='--')">
+            <style targetArrow="Diamond" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.rightDecorator='o' and (self.line='.' or self.line='..')">
+            <style lineStyle="dash" targetArrow="Diamond" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.leftDecorator='*' and (self.line='-' or self.line='--')">
+            <style sourceArrow="FillDiamond" targetArrow="FillDiamond" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.leftDecorator='*' and (self.line='.' or self.line='..')">
+            <style lineStyle="dash" sourceArrow="FillDiamond" targetArrow="NoDecoration" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.rightDecorator='*' and (self.line='-' or self.line='--')">
+            <style targetArrow="FillDiamond" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.rightDecorator='*' and (self.line='.' or self.line='..')">
+            <style lineStyle="dash" targetArrow="FillDiamond" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+              <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <beginLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.leftCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </beginLabelStyleDescription>
+              <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.label">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </centerLabelStyleDescription>
+              <endLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.rightCardinality.replaceAll('&quot;', '')">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </endLabelStyleDescription>
+            </style>
+          </conditionnalStyles>
+        </edgeMappings>
+        <containerMappings name="Package" preconditionExpression="aql:self.eContainer().oclIsTypeOf(classDiagram::ClassDiagram)" semanticCandidatesExpression="aql:self.elements" domainClass="classDiagram::PackageDeclaration">
+          <subContainerMappings name="Class" preconditionExpression="aql:self.eContainer().oclIsTypeOf(classDiagram::PackageDeclaration)" semanticCandidatesExpression="aql:self.elements" domainClass="classDiagram::Class" childrenPresentation="List">
+            <subNodeMappings name="Attribute" preconditionExpression="aql:self.attributes->size()&lt;>0" semanticCandidatesExpression="aql:self.attributes" domainClass="classDiagram::Attribute">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:self.visibility + ' ' + self.name + ' : '  + self.type.name" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+              </style>
+            </subNodeMappings>
+            <subNodeMappings name="Operation" preconditionExpression="aql:self.operations->size()&lt;>0" semanticCandidatesExpression="aql:self.operations" domainClass="classDiagram::Operation">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:self.visibility + ' ' + self.name + '('  + (self.params.name->collect(str|str+' : '+(self.params->select(p|p.name=str)).type.name))->sep(', ') + ')' + ' : ' + self.returnType.name" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="aql:self.name">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+            </style>
+          </subContainerMappings>
+          <subContainerMappings name="Enum" preconditionExpression="aql:self.eContainer().oclIsTypeOf(classDiagram::PackageDeclaration)" semanticCandidatesExpression="aql:self.elements" domainClass="classDiagram::Enum" childrenPresentation="List">
+            <subNodeMappings name="EnumItem" semanticCandidatesExpression="feature:eAllContents" domainClass="classDiagram::EnumItem">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subContainerMappings>
+          <subContainerMappings name="Package" preconditionExpression="aql:self.eContainer().oclIsTypeOf(classDiagram::PackageDeclaration)" semanticCandidatesExpression="aql:self.elements" domainClass="classDiagram::PackageDeclaration">
+            <subContainerMappings name="Class" preconditionExpression="aql:self.eContainer().oclIsTypeOf(classDiagram::PackageDeclaration)" semanticCandidatesExpression="aql:self.elements" domainClass="classDiagram::Class" childrenPresentation="List">
+              <subNodeMappings name="Attribute" preconditionExpression="aql:self.attributes->size()&lt;>0" semanticCandidatesExpression="aql:self.attributes" domainClass="classDiagram::Attribute">
+                <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:self.visibility + ' ' + self.name + ' : '  + self.type.name" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                  <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+                </style>
+              </subNodeMappings>
+              <subNodeMappings name="Operation" preconditionExpression="aql:self.operations->size()&lt;>0" semanticCandidatesExpression="aql:self.operations" domainClass="classDiagram::Operation">
+                <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:self.visibility + ' ' + self.name + '('  + (self.params.name->collect(str|str+' : '+(self.params->select(p|p.name=str)).type.name))->sep(', ') + ')' + ' : ' + self.returnType.name" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                  <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+                </style>
+              </subNodeMappings>
+              <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="aql:self.name">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+              </style>
+            </subContainerMappings>
+            <subContainerMappings name="Enum" preconditionExpression="aql:self.eContainer().oclIsTypeOf(classDiagram::PackageDeclaration)" semanticCandidatesExpression="aql:self.elements" domainClass="classDiagram::Enum" childrenPresentation="List">
+              <subNodeMappings name="EnumItem" semanticCandidatesExpression="feature:eAllContents" domainClass="classDiagram::EnumItem">
+                <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                  <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+                </style>
+              </subNodeMappings>
+              <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+              </style>
+            </subContainerMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="3" labelSize="12" showIcon="false">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>bold</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </style>
+          </subContainerMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="3" labelSize="12" showIcon="false">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelFormat>bold</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </containerMappings>
+        <containerMappings name="Class" preconditionExpression="aql:self.eContainer().oclIsTypeOf(classDiagram::ClassDiagram)" semanticCandidatesExpression="aql:self.elements" domainClass="classDiagram::Class" childrenPresentation="List">
+          <subNodeMappings name="Attribute" preconditionExpression="aql:self.attributes->size()&lt;>0" semanticCandidatesExpression="aql:self.attributes" domainClass="classDiagram::Attribute">
+            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:self.visibility + ' ' + self.name + ' : '  + self.type.name" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="Operation" preconditionExpression="aql:self.operations->size()&lt;>0" semanticCandidatesExpression="aql:self.operations" domainClass="classDiagram::Operation">
+            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:self.visibility + ' ' + self.name + '('  + (self.params.name->collect(str|str+' : '+(self.params->select(p|p.name=str)).type.name))->sep(', ') + ')' + ' : ' + self.returnType.name" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="aql:self.name">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+          </style>
+        </containerMappings>
+        <containerMappings name="Enum" preconditionExpression="aql:self.eContainer().oclIsTypeOf(classDiagram::ClassDiagram)" semanticCandidatesExpression="aql:self.elements" domainClass="classDiagram::Enum" childrenPresentation="List">
+          <subNodeMappings name="EnumItem" semanticCandidatesExpression="feature:eAllContents" domainClass="classDiagram::EnumItem">
+            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="Elements">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Class" containerMappings="//@ownedViewpoints[name='ClassDiagram']/@ownedRepresentations[name='Class%20Diagram']/@defaultLayer/@containerMappings[name='Class']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="classDiagram::Class" referenceName="elements">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Class'+container.elements->filter(classDiagram::Class)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Property">
+            <tools xsi:type="tool:NodeCreationDescription" name="Attribute" nodeMappings="//@ownedViewpoints[name='ClassDiagram']/@ownedRepresentations[name='Class%20Diagram']/@defaultLayer/@containerMappings[name='Class']/@subNodeMappings[name='Attribute']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="classDiagram::Attribute" referenceName="attributes">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="visibility" valueExpression="aql:'+'"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Attribute'+container.attributes->filter(classDiagram::Attribute)->size()"/>
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                      <subModelOperations xsi:type="tool_1:CreateInstance" typeName="classDiagram::PrimitiveType" referenceName="type" variableName="defaultType"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Operation" nodeMappings="//@ownedViewpoints[name='ClassDiagram']/@ownedRepresentations[name='Class%20Diagram']/@defaultLayer/@containerMappings[name='Class']/@subNodeMappings[name='Operation']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="classDiagram::Operation" referenceName="operations" variableName="newOperation">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Operation'+container.operation->filter(classDiagram::Operation)->size()"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_2:EditionTableDescription" name="Design Metrics" domainClass="classDiagram::ClassDiagram">
+      <ownedLineMappings name="Class Diagram" domainClass="classDiagram::ClassDiagram" semanticCandidatesExpression="var:self"/>
+      <ownedColumnMappings name="DSC" headerLabelExpression="DSC(Design Size)" featureName="elements" labelExpression="aql: self.getDSC()"/>
+      <ownedColumnMappings name="NOH" headerLabelExpression="NOH(Hierarchies)" featureName="elements" labelExpression="aql: self.getNOH()"/>
+      <ownedColumnMappings name="ANA" headerLabelExpression="ANA(Abstraction)" featureName="elements" labelExpression="aql: self.getANA()"/>
+      <ownedColumnMappings name="DAM" headerLabelExpression="DAM(Encapsulation)" featureName="elements" labelExpression="aql: self.getDAM()"/>
+      <ownedColumnMappings name="DCC" headerLabelExpression="DCC(Coupling)" featureName="elements" labelExpression="aql: self.getDCC()"/>
+      <ownedColumnMappings name="CAM" headerLabelExpression="CAM(Cohesion)" featureName="elements" labelExpression="aql: self.getCAM()"/>
+      <ownedColumnMappings name="MOA" headerLabelExpression="MOA(Composition)" featureName="elements" labelExpression="aql: self.getMOA()"/>
+      <ownedColumnMappings name="MFA" headerLabelExpression="MFA(Inheritance)" featureName="elements" labelExpression="aql: self.getMFA()"/>
+      <ownedColumnMappings name="NOP" headerLabelExpression="NOP(Polymorphism)" featureName="elements" labelExpression="aql: self.getNOP()"/>
+      <ownedColumnMappings name="CIS" headerLabelExpression="CIS(Messaging)" featureName="elements" labelExpression="aql: self.getCIS()"/>
+      <ownedColumnMappings name="NOM" headerLabelExpression="NOM(Complexity)" featureName="elements" labelExpression="aql: self.getNOM()"/>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="com.rm2pt.rapidood.classdiagram.design.Services"/>
+  </ownedViewpoints>
+</description:Group>

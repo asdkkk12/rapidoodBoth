@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+	  <command
+		  id="com.rm2pt.rapidood.optimization.commands.designmodeloptimization"
+		  name="Evaluate Design Model">
+	  </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+		    class="com.rm2pt.rapidood.optimization.handlers.DesignModelOptimizationHandler"
+			commandId="com.rm2pt.rapidood.optimization.commands.designmodeloptimization">
+	  </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+
+      <menuContribution
+			allPopups="false"
+			locationURI="popup:org.eclipse.ui.popup.any">
+			<menu
+				id="OODEvaluator"
+				label="RapidOOD">
+				<command
+	                commandId="com.rm2pt.rapidood.optimization.commands.designmodeloptimization"
+	                label="Optimize Design Model"
+	                style="push">
+	          	</command>
+	          	<visibleWhen checkEnabled="true">
+                    <with variable="selection">
+                        <iterate operator="or">
+                            <adapt type="org.eclipse.core.resources.IFile">
+                                <test property="org.eclipse.core.resources.extension" value="cd"/>
+                            </adapt>
+                        </iterate>
+                    </with>
+                </visibleWhen>
+			</menu>
+		</menuContribution>
+   </extension>
+
+</plugin>

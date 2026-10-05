@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: com.rm2pt.rapidood.cd
+Bundle-ManifestVersion: 2
+Bundle-Name: com.rm2pt.rapidood.cd
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: com.rm2pt.rapidood.cd; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.emf.mwe2.language;bundle-version="2.12.1",
+ org.eclipse.xtext.generator;bundle-version="2.25.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: com.rm2pt.rapidood.cd.serializer,
+ com.rm2pt.rapidood.cd.generator,
+ com.rm2pt.rapidood.cd.validation,
+ com.rm2pt.rapidood.cd.services,
+ com.rm2pt.rapidood.cd.classDiagram.util,
+ com.rm2pt.rapidood.cd,
+ com.rm2pt.rapidood.cd.scoping,
+ com.rm2pt.rapidood.cd.classDiagram.impl,
+ com.rm2pt.rapidood.cd.classDiagram,
+ com.rm2pt.rapidood.cd.parser.antlr,
+ com.rm2pt.rapidood.cd.parser.antlr.internal,
+ com.rm2pt.rapidood.cd.formatting2
+Import-Package: org.apache.log4j

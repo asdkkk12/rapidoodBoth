@@ -1,0 +1,167 @@
+@startuml
+' ===================== 领域实体类（8个，来自 DomainModel）=====================
+class LoanRequest {
+	- Status : LoanRequesttatus
+	- RequestID : Integer
+	- Name : String
+	- LoanAmount : Real
+	- LoanPurpose : String
+	- Income : Real
+	- PhoneNumber : Integer
+	- PostalAddress : String
+	- ZipCode : Integer
+	- Email : String
+	- WorkReferences : String
+	- CreditReferences : String
+	- CheckingAccountNumber : Integer
+	- SecurityNumber : Integer
+	- CreditScore : Integer
+}
+class Loan {
+	- LoanID : Integer
+	- RemainAmountToPay : Real
+	- Status : LoanStatus
+	- IsPaidinFull : Boolean
+	- StartDate : Date
+	- EndDate : Date
+	- CurrentOverDueDate : Date
+	- RePaymentDays : Integer
+	- RepaymentAmount : Real
+}
+class LoanTerm {
+	- ItemID : Integer
+	- Content : String
+}
+class CheckingAccount {
+	- Balance : Real
+	- Status : CheckingAccountStatus
+}
+class CreditHistory {
+	- OutstandingDebt : Real
+	- BadDebits : Integer
+}
+class LoanAccount {
+	- LoanAccountID : Integer
+	- Balance : Real
+	- Status : LoanAccountStatus
+}
+class ApprovalLetter {
+	- Content : String
+}
+class LoanAgreement {
+	- Content : String
+}
+
+' ===================== 业务服务类（7个，来自 remodel Services）=====================
+class SubmitLoanRequest {
+	' TempProperty: LoanRequest : LoanRequest
+	- CurrentLoanRequest : LoanRequest
+	+ enterLoanInformation ( Integer requestid, String name, Real loanamount, String loanpurpose, Real income, Integer phonenumber, String postaladdress, Integer zipcode, String email, String workreferences, String creditreferences, Integer checkingaccountnumber, Integer securitynumber ) : Boolean
+	+ creditRequest ( ) : Boolean
+	+ accountStatusRequest ( ) : Boolean
+	+ calculateScore ( ) : Integer
+}
+class ThirdPartyServices {
+	+ sendEmail ( String emailaddress, String title, String content ) : Boolean
+	+ print ( String content, Integer numbers ) : Boolean
+	+ createLoanAccount ( Integer id ) : LoanAccount
+	+ transferFunds ( Integer id, Real amount ) : Boolean
+	+ getCreditHistory ( Integer securityid, String name ) : CreditHistory
+	+ getCheckingAccountStatus ( Integer cid ) : CheckingAccount
+}
+class EnterValidatedCreditReferences {
+	' TempProperty: LoanRequest : LoanRequest / LoanRequest*
+	- CurrentLoanRequest : LoanRequest
+	- PendingLoanRequests : LoanRequest
+	+ listSubmitedLoanRequest ( ) : Set
+	+ chooseLoanRequest ( Integer requestid ) : LoanRequest
+	+ markRequestValid ( ) : Boolean
+}
+class EvaluateLoanRequest {
+	' TempProperty: LoanRequest : LoanRequest / LoanRequest*
+	- CurrentLoanRequest : LoanRequest
+	- PendingLoanRequests : LoanRequest
+	+ listTenLoanRequest ( ) : Set
+	+ chooseOneForReview ( Integer requestid ) : LoanRequest
+	+ checkCreditHistory ( ) : CreditHistory
+	+ reviewCheckingAccount ( ) : CheckingAccount
+	+ listAvaiableLoanTerm ( ) : Set
+	+ addLoanTerm ( Integer termid ) : Boolean
+	+ approveLoanRequest ( ) : Boolean
+}
+class GenerateLoanLetterAndAgreement {
+	' TempProperty: CurrentApprovalLetter:ApprovalLetter, CurrentLoanAgreement:LoanAgreement, LoanRequest:LoanRequest / LoanRequest*
+	- CurrentApprovalLetter : ApprovalLetter
+	- CurrentLoanAgreement : LoanAgreement
+	- CurrentLoanRequest : LoanRequest
+	- PendingLoanRequests : LoanRequest
+	+ listApprovalRequest ( ) : Set
+	+ genereateApprovalLetter ( Integer id ) : Boolean
+	+ emailToAppliant ( ) : Boolean
+	+ generateLoanAgreement ( ) : Boolean
+	+ printLoanAgreement ( Integer number ) : Boolean
+}
+class LoanProcessingSystemSystem {
+	+ bookNewLoan ( Integer requestid, Integer loanid, Integer accountid, Date startdate, Date enddate, Integer repaymentdays ) : Boolean
+	+ generateStandardPaymentNotice ( ) : Boolean
+	+ generateLateNotice ( ) : Boolean
+	+ listBookedLoans ( ) : Boolean
+	+ loanPayment ( Integer loanid ) : Boolean
+	+ closeOutLoan ( Integer loanid ) : Boolean
+}
+class ManageLoanTermCRUDService {
+	+ createLoanTerm ( Integer itemid, String content ) : Boolean
+	+ queryLoanTerm ( Integer itemid ) : LoanTerm
+	+ modifyLoanTerm ( Integer itemid, String content ) : Boolean
+	+ deleteLoanTerm ( Integer itemid ) : Boolean
+}
+
+' ===================== 实体-实体关联（7条，同 loan.cd）=====================
+LoanRequest "ReferedLoanRequest: 1"--"ApprovalLoan: 1" Loan
+LoanRequest--"RequestedCAHistory: 1" CheckingAccount
+LoanRequest--"RequestedCreditHistory: 1" CreditHistory
+LoanRequest--"AttachedApprovalLetter: 1" ApprovalLetter
+LoanRequest--"AttachedLoanAgreement: 1" LoanAgreement
+LoanRequest--"AttachedLoanTerms: *" LoanTerm
+Loan--"BelongedLoanAccount: 1" LoanAccount
+
+' ===================== 服务-实体关联（18条）=====================
+SubmitLoanRequest--LoanRequest
+SubmitLoanRequest--CreditHistory
+SubmitLoanRequest--CheckingAccount
+ThirdPartyServices--CheckingAccount
+ThirdPartyServices--CreditHistory
+ThirdPartyServices--LoanAccount
+EnterValidatedCreditReferences--LoanRequest
+EvaluateLoanRequest--LoanRequest
+EvaluateLoanRequest--LoanTerm
+EvaluateLoanRequest--CreditHistory
+EvaluateLoanRequest--CheckingAccount
+GenerateLoanLetterAndAgreement--LoanRequest
+GenerateLoanLetterAndAgreement--ApprovalLetter
+GenerateLoanLetterAndAgreement--LoanAgreement
+LoanProcessingSystemSystem--LoanRequest
+LoanProcessingSystemSystem--Loan
+LoanProcessingSystemSystem--LoanAccount
+ManageLoanTermCRUDService--LoanTerm
+
+enum LoanRequesttatus {
+	SUBMITTED
+	REFERENCESVALIDATED
+	APPROVED
+	READYFORREVIEW
+	INCOMPLETEINFORMATION
+}
+enum LoanStatus {
+	LSOPEN
+	CLOSED
+}
+enum CheckingAccountStatus {
+	GOODSTANDING
+	SUSPENDED
+}
+enum LoanAccountStatus {
+	NORMAL
+	HASPAIDINFULL
+}
+@enduml

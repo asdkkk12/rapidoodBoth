@@ -1,0 +1,21 @@
+@startuml
+participant Customer
+participant QueryForTravelService
+
+Customer -> QueryForTravelService : "queryStation"
+QueryForTravelService --> Customer : "queryStation return"
+Customer -> QueryForTravelService : "queryTrain"
+QueryForTravelService --> Customer : "queryTrain return"
+Customer -> QueryForTravelService : "queryRoute"
+QueryForTravelService --> Customer : "queryRoute return"
+Customer -> QueryForTravelService : "showPrice"
+QueryForTravelService --> Customer : "showPrice return"
+
+QueryForTravelService -> QueryForTravelService : "[Definition] station = Station.allInstance()"
+QueryForTravelService -> QueryForTravelService : "[Definition] station2 = Station.allInstance()"
+QueryForTravelService -> QueryForTravelService : "[Definition] train = Train.allInstance()"
+QueryForTravelService -> QueryForTravelService : "[Definition] route = Route.allInstance()"
+QueryForTravelService -> QueryForTravelService : "[Definition] price = Price.allInstance()"
+QueryForTravelService -> QueryForTravelService : "[Postcondition] result = true"
+
+@enduml

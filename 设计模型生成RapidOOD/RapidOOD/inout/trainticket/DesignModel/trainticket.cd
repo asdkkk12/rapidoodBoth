@@ -1,0 +1,437 @@
+@startuml
+class Price {
+	- Id : String
+	- TrainType : String
+	- RouteId : String
+	- BasicPriceRate : Real
+	- FirstClassPriceRate : Real
+}
+class PriceInfo {
+	- Id : String
+	- TrainType : String
+	- RouteId : String
+	- BasicPriceRate : Real
+	- FirstClassPriceRate : Real
+}
+class Assurance {
+	- Id : String
+	- OrderId : String
+	- Type : AssuranceType
+}
+class AssuranceTypeBean {
+	- Index : Integer
+	- Name : String
+	- Price : Real
+}
+class PlainAssurance {
+	- Id : String
+	- OrderId : String
+	- TypeIndex : Integer
+	- TypeName : String
+	- TypePrice : Real
+}
+class User {
+	- UserId : String
+	- UserName : String
+	- Password : String
+	- Roles : Set
+	- Gender : Integer
+	- DocumentType : Integer
+	- DocumentNum : String
+	- Email : String
+}
+class AuthDto {
+	- UserId : String
+	- Username : String
+	- Password : String
+}
+class BasicAuthDto {
+	- Username : String
+	- Password : String
+	- VerficationCode : String
+}
+class TokenDto {
+	- UserId : String
+	- Username : String
+	- Token : String
+}
+class GetAccountByIdInfo {
+	- AccoutId : String
+}
+class GetAccountByIdResult {
+	- Status : Boolean
+	- Message : String
+}
+class GetOrderByIdInfo {
+	- OrderId : String
+}
+class Order {
+	- Id : String
+	- BoughtData : String
+	- TravelDate : String
+	- TravelTime : String
+	- AccoutId : String
+	- ContactsName : String
+	- DocumentType : Integer
+	- ContactsDocumentNumber : String
+	- TrainNumber : String
+	- CoachNumber : Integer
+	- SeatClass : Integer
+	- SeatNumber : String
+	- From : String
+	- To : String
+	- Status : Integer
+	- Price : String
+}
+class OrderAlterInfo {
+	- AccoutId : String
+	- PreviousOrderId : String
+	- LoginToken : String
+}
+class OrderInfo {
+	- LoginId : String
+	- TravelDateStart : String
+	- TravelDateEnd : String
+	- BoughtDateStart : String
+	- BoughtDateEnd : String
+	- State : Integer
+	- EnableTravelDateQuery : Boolean
+	- EnableBoughtDateQuery : Boolean
+	- EnableStateQuery : Boolean
+}
+class Accout {
+	- Id : String
+	- AccoutId : String
+	- LoginId : String
+	- Password : String
+	- Gender : String
+	- Name : String
+	- Money : String
+	- DocumentType : Integer
+	- DocumentNum : String
+	- Email : String
+}
+class Config {
+	- Name : String
+	- Value : String
+	- Description : String
+}
+class ConsignPrice {
+	- Id : String
+	- Index : Integer
+	- InitialWeight : Real
+	- InitialPrice : Real
+	- WithinPrice : Real
+	- BeyondPrice : Real
+}
+class Consign {
+	- Id : String
+	- OrderId : String
+	- AccoutId : String
+	- HandleDate : String
+	- TargetDate : String
+	- From : String
+	- To : String
+	- Consignee : String
+	- Phone : String
+	- Weight : Real
+	- IsWithin : Boolean
+}
+class ConsignRecord {
+	- Id : String
+	- OrderId : String
+	- HandleDate : String
+	- TargetDate : String
+	- From : String
+	- To : String
+	- Consignee : String
+	- Phone : String
+	- Weight : Real
+	- IsWithin : Boolean
+}
+class GetPriceDomain {
+	- Weight : Real
+	- IsWithinRegion : Boolean
+}
+class InsertConsignRecordResult {
+	- Status : Boolean
+	- Message : String
+}
+class Contacts {
+	- Id : String
+	- AccountId : String
+	- Name : String
+	- DocumentNumber : String
+	- PhoneNumber : String
+}
+class Delivery {
+	- Id : String
+	- OrderId : String
+	- FoodName : String
+	- StoreName : String
+	- StationName : String
+}
+class DeliveryInfo {
+	- OrderId : String
+	- DeliveryTime : String
+}
+class FoodDeliveryOrder {
+	- Id : String
+	- StationFoodStoreId : String
+	- FoodList : Set
+	- TripId : String
+	- SeatNo : Integer
+	- CreatedTime : String
+	- DeliveryTime : String
+	- DeliveryFee : String
+}
+class SeatInfo {
+	- OrderId : String
+	- SeatNo : Integer
+}
+class StationFoodStore {
+	- Id : String
+	- StationId : String
+	- StoreName : String
+	- Telephone : String
+	- BusinessTime : String
+	- DeliveryFee : Real
+	- FoodList : Set
+}
+class TripOrderInfo {
+	- OrderId : String
+	- TripId : String
+}
+class AllTripFood {
+	- TrainFoodList : Set
+	- FoodStoreList : Set
+}
+class Food {
+	- Id : String
+	- OrderId : String
+	- FoodType : Integer
+	- StationName : String
+	- StoreName : String
+	- FoodName : String
+	- Price : Real
+}
+class Balance {
+	- UserId : String
+	- Balance : String
+}
+class Money {
+	- Id : String
+	- UserId : String
+	- Name : String
+	- Type : MoneyType
+}
+class Payment {
+	- Id : String
+	- OrderId : String
+	- UserId : String
+	- Price : String
+	- Type : PaymentType
+}
+class OutsidePaymentInfo {
+	- OrderId : String
+	- Price : String
+	- UserId : String
+}
+class PaymentInfo {
+	- UserId : String
+	- OrderId : String
+	- TripId : String
+	- Price : String
+}
+class Mail {
+	- MailFrom : String
+	- MailTo : String
+	- MailCc : String
+	- MailBcc : String
+	- MailSubject : String
+	- MailContent : String
+	- ContentType : String
+	- Attachment : Set
+}
+class NotifyInfo {
+	- Id : String
+	- SendStatus : Boolean
+	- Email : String
+	- OrderNumber : String
+	- UserName : String
+	- StartPlace : String
+	- EndPlace : String
+	- StartTime : String
+	- Time : String
+	- SeatClass : String
+	- SeatNumber : String
+	- Price : String
+}
+class PriceConfig {
+	- Id : String
+	- TrainType : String
+	- RouteId : String
+	- BasicPriceRate : Real
+	- FirstClassPriceRate : Real
+}
+class RebookInfo {
+	- LoginId : String
+	- OrderId : String
+	- OldTripId : String
+	- TripId : String
+	- SeatType : Integer
+	- Time : String
+}
+class Route {
+	- Id : String
+	- Stations : Set
+	- Distances : Set
+	- StartStation : String
+	- EndStation : String
+}
+class RouteInfo {
+	- Id : String
+	- StationList : String
+	- DistanceList : Integer
+	- StartStation : String
+	- EndStation : String
+}
+class SecurityConfig {
+	- Id : String
+	- Name : String
+	- Value : String
+	- Description : String
+}
+class Station {
+	- Id : String
+	- Name : String
+	- StayTime : Integer
+}
+class TrainFood {
+	- Id : String
+	- TripId : String
+	- FoodList : Set
+}
+class Train {
+	- Id : String
+	- Name : String
+	- EconomyClass : Integer
+	- ConfortClass : Integer
+	- AverageSpeed : Integer
+}
+class Seat {
+	- TravelDate : String
+	- TrainNumber : String
+	- StartStation : String
+	- DestStation : String
+	- SeatType : Integer
+}
+class Travel {
+	- StartPlace : String
+	- EndPlace : String
+	- DepartureTime : String
+}
+class Trip {
+	- Id : String
+	- TrainName : String
+	- RouteId : String
+	- StartStationName : String
+	- StationsName : String
+	- TerminalStationName : String
+	- StartTime : String
+	- EndTime : String
+}
+class TripId {
+	- Type : Type
+	- Number : String
+}
+class AdminTrip {
+}
+class TripAllDetail {
+	- Status : Boolean
+	- Message : String
+}
+class TripResponse {
+	- TrainName : String
+	- RouteId : String
+	- StartStationName : String
+	- StationsName : String
+	- TerminalStationName : String
+	- StartTime : String
+	- EndTime : String
+	- EconomyClass : Integer
+	- ConfortClass : Integer
+	- PriceForEconomyClass : String
+	- PriceForConfortClass : String
+}
+class TravelAdvanceResultInfo {
+	- TripId : String
+	- TrainTypeId : String
+	- StartStation : String
+	- EndStation : String
+	- StopStations : Set
+	- PriceForSecondClassSeat : String
+	- NumberOfRestTicketSecondClass : Integer
+	- PriceForFirstClassSeat : String
+	- NumberOfRestTicketFirstClass : Integer
+	- StartTime : String
+	- EndTime : String
+}
+class TransferTravelResult {
+	- FirstSectionResult : Set
+	- SecondSectionResult : Set
+}
+class TravelAdvanceResultUnit {
+	- TripId : String
+	- TrainType : String
+	- StartStation : String
+	- EndStation : String
+	- StopStations : Set
+	- PriceForSecondClassSet : String
+	- NumberOfRestTicketSecondSeat : Integer
+	- StartTime : String
+	- EndTime : String
+}
+class WaitListOrder {
+	- Id : String
+	- TravelTime : String
+	- AccountId : String
+	- ContactsId : String
+	- ContactsName : String
+	- ContactsDocumentType : Integer
+	- ContactsDocumentNumber : String
+	- TrainNumber : String
+	- SeatType : Integer
+}
+class WaitListOrderVO {
+	- AccoutId : String
+	- ContactsId : String
+	- TripId : String
+	- SeatType : Integer
+	- Time : String
+	- From : String
+	- To : String
+	- Price : String
+}
+enum AssuranceType {
+	VEHICLE
+	OTHERS
+}
+enum MoneyType {
+	A
+	D
+}
+enum PaymentType {
+	D
+	P
+	O
+	E
+}
+enum Type {
+	G
+	D
+	Z
+	T
+	K
+}
+@enduml

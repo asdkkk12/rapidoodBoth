@@ -1,0 +1,42 @@
+{
+    "latex-workshop.latex.outDir": "%DIR%",
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "/Library/TeX/texbin/latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "latexmk_clean",
+            "command": "/Library/TeX/texbin/latexmk",
+            "args": [
+                "-outdir=%OUTDIR%",
+                "-c",
+                "%DOC%"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": [
+                "latexmk"
+            ]
+        }
+    ],
+    "latex-workshop.latex.clean.tools": [
+        {
+            "name": "latexmk_clean",
+            "tools": [
+                "latexmk_clean"
+            ]
+        }
+    ]
+}

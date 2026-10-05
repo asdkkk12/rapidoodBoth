@@ -1,0 +1,79 @@
+@startuml
+class LoanRequest {
+	- Status : LoanRequesttatus
+	- RequestID : Integer
+	- Name : String
+	- LoanAmount : Real
+	- LoanPurpose : String
+	- Income : Real
+	- PhoneNumber : Integer
+	- PostalAddress : String
+	- ZipCode : Integer
+	- Email : String
+	- WorkReferences : String
+	- CreditReferences : String
+	- CheckingAccountNumber : Integer
+	- SecurityNumber : Integer
+	- CreditScore : Integer
+}
+class Loan {
+	- LoanID : Integer
+	- RemainAmountToPay : Real
+	- Status : LoanStatus
+	- IsPaidinFull : Boolean
+	- StartDate : Date
+	- EndDate : Date
+	- CurrentOverDueDate : Date
+	- RePaymentDays : Integer
+	- RepaymentAmount : Real
+}
+class LoanTerm {
+	- ItemID : Integer
+	- Content : String
+}
+class CheckingAccount {
+	- Balance : Real
+	- Status : CheckingAccountStatus
+}
+class CreditHistory {
+	- OutstandingDebt : Real
+	- BadDebits : Integer
+}
+class LoanAccount {
+	- LoanAccountID : Integer
+	- Balance : Real
+	- Status : LoanAccountStatus
+}
+class ApprovalLetter {
+	- Content : String
+}
+class LoanAgreement {
+	- Content : String
+}
+LoanRequest "ReferedLoanRequest: 1"--"ApprovalLoan: 1" Loan
+LoanRequest--"RequestedCAHistory: 1" CheckingAccount
+LoanRequest--"RequestedCreditHistory: 1" CreditHistory
+LoanRequest--"AttachedApprovalLetter: 1" ApprovalLetter
+LoanRequest--"AttachedLoanAgreement: 1" LoanAgreement
+LoanRequest--"AttachedLoanTerms: *" LoanTerm
+Loan--"BelongedLoanAccount: 1" LoanAccount
+enum LoanRequesttatus {
+	SUBMITTED
+	REFERENCESVALIDATED
+	APPROVED
+	READYFORREVIEW
+	INCOMPLETEINFORMATION
+}
+enum LoanStatus {
+	LSOPEN
+	CLOSED
+}
+enum CheckingAccountStatus {
+	GOODSTANDING
+	SUSPENDED
+}
+enum LoanAccountStatus {
+	NORMAL
+	HASPAIDINFULL
+}
+@enduml

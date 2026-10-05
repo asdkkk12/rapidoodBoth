@@ -1,0 +1,177 @@
+@startuml
+' ===================== 领域实体类（13个）=====================
+class Store {
+	- Id : Integer
+	- Name : String
+	- Address : String
+	- IsOpened : Boolean
+}
+class ProductCatalog {
+	- Id : Integer
+	- Name : String
+}
+class CashDesk {
+	- Id : Integer
+	- Name : String
+	- IsOpened : Boolean
+}
+class Sale {
+	- IsComplete : Boolean
+	- Amount : Real
+	- IsReadytoPay : Boolean
+}
+class Cashier {
+	- Id : Integer
+	- Name : String
+}
+class SalesLineItem {
+	- Quantity : Integer
+	- Subamount : Real
+}
+class Item {
+	- Barcode : Integer
+	- Name : String
+	- Price : Real
+	- StockNumber : Integer
+	- OrderPrice : Real
+}
+class Payment {
+	- AmountTendered : Real
+}
+class CashPayment {
+	- Balance : Real
+}
+class CardPayment {
+	- CardAccountNumber : String
+}
+class OrderEntry {
+	- Quantity : Integer
+	- SubAmount : Real
+}
+class Supplier {
+	- Id : Integer
+	- Name : String
+}
+class OrderProduct {
+	- Id : Integer
+	- Time : Date
+	- Amount : Real
+}
+
+' ===================== 仓储类（6个，来自 AutoCRUD 实体）=====================
+class StoreRepository {
+	+ findStore ( String condition ) : Store
+	+ updateStore ( Store object ) : boolean
+	+ deleteStore ( Store object ) : boolean
+	+ createStore ( ) : Store
+}
+class ProductCatalogRepository {
+	+ findProductCatalog ( String condition ) : ProductCatalog
+	+ updateProductCatalog ( ProductCatalog object ) : boolean
+	+ deleteProductCatalog ( ProductCatalog object ) : boolean
+	+ createProductCatalog ( ) : ProductCatalog
+}
+class CashDeskRepository {
+	+ findCashDesk ( String condition ) : CashDesk
+	+ updateCashDesk ( CashDesk object ) : boolean
+	+ deleteCashDesk ( CashDesk object ) : boolean
+	+ createCashDesk ( ) : CashDesk
+}
+class CashierRepository {
+	+ findCashier ( String condition ) : Cashier
+	+ updateCashier ( Cashier object ) : boolean
+	+ deleteCashier ( Cashier object ) : boolean
+	+ createCashier ( ) : Cashier
+}
+class ItemRepository {
+	+ findItem ( String condition ) : Item
+	+ updateItem ( Item object ) : boolean
+	+ deleteItem ( Item object ) : boolean
+	+ createItem ( ) : Item
+}
+class SupplierRepository {
+	+ findSupplier ( String condition ) : Supplier
+	+ updateSupplier ( Supplier object ) : boolean
+	+ deleteSupplier ( Supplier object ) : boolean
+	+ createSupplier ( ) : Supplier
+}
+
+' ===================== 业务服务类（3个，来自 remodel Services）=====================
+class CoCoMESystem {
+	- CurrentCashDesk : CashDesk
+	- CurrentStore : Store
+	+ openCashDesk ( Integer cashDeskID ) : boolean
+	+ closeCashDesk ( Integer cashDeskID ) : boolean
+	+ openStore ( Integer storeID ) : boolean
+	+ closeStore ( Integer storeID ) : boolean
+	+ changePrice ( Integer barcode, Real newPrice ) : boolean
+	+ receiveOrderedProduct ( Integer orderID ) : boolean
+	+ listSuppliers ( ) : Set
+	+ showStockReports ( ) : Set
+}
+class ProcessSaleService {
+	- CurrentSaleLine : SalesLineItem
+	- CurrentSale : Sale
+	- CurrentPaymentMethod : PaymentMethod
+	+ makeNewSale ( ) : boolean
+	+ enterItem ( Integer barcode, Integer quantity ) : boolean
+	+ endSale ( ) : Real
+	+ makeCashPayment ( Real amount ) : boolean
+	+ makeCardPayment ( String cardAccountNumber, Date expiryDate, Real fee ) : boolean
+}
+class OrderProductsService {
+	- CurrentOrderProduct : OrderProduct
+	+ makeNewOrder ( Integer orderid ) : boolean
+	+ listAllOutOfStoreProducts ( ) : Set
+	+ orderItem ( Integer barcode, Integer quantity ) : boolean
+	+ chooseSupplier ( Integer supplierID ) : boolean
+	+ placeOrder ( ) : boolean
+}
+
+' ===================== 继承关系（同 cocome.cd）=====================
+CashPayment--|> Payment
+CardPayment--|> Payment
+
+' ===================== 实体关联（19条，同 cocome.cd）=====================
+Store "*"--"1" StoreRepository
+ProductCatalog "*"--"1" ProductCatalogRepository
+CashDesk "*"--"1" CashDeskRepository
+Cashier "*"--"1" CashierRepository
+Item "*"--"1" ItemRepository
+Supplier "*"--"1" SupplierRepository
+Store "BelongedStore: 1"--"AssociationCashdeskes: *" CashDesk
+Store--"Productcatalogs: *" ProductCatalog
+Store--"Items: *" Item
+Store "WorkedStore: 1"--"Cashiers: *" Cashier
+Store "Belongedstore: 1"--"Sales: *" Sale
+ProductCatalog "BelongedCatalog: 1"--"ContainedItems: *" Item
+CashDesk "BelongedCashDesk: 1"--"ContainedSales: *" Sale
+Sale "BelongedSale: 1"--"ContainedSalesLine: *" SalesLineItem
+Sale "BelongedSale: 1"--"AssoicatedPayment: 1" Payment
+SalesLineItem--"BelongedItem: 1" Item
+OrderEntry--"Item: 1" Item
+OrderProduct--"Supplier: 1" Supplier
+OrderProduct--"ContainedEntries: *" OrderEntry
+
+' ===================== 服务-实体关联（15条）=====================
+CoCoMESystem--CashDesk
+CoCoMESystem--Store
+CoCoMESystem--Item
+CoCoMESystem--OrderProduct
+CoCoMESystem--Supplier
+ProcessSaleService--Sale
+ProcessSaleService--SalesLineItem
+ProcessSaleService--Item
+ProcessSaleService--CashPayment
+ProcessSaleService--CardPayment
+ProcessSaleService--Store
+OrderProductsService--OrderProduct
+OrderProductsService--OrderEntry
+OrderProductsService--Item
+OrderProductsService--Supplier
+
+enum PaymentMethod {
+	CASH
+	CARD
+}
+@enduml

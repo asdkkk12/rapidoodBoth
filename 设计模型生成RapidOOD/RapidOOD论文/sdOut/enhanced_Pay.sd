@@ -1,0 +1,14 @@
+@startuml
+participant Customer
+participant PayService
+
+Customer -> PayService : "queryOder"
+PayService --> Customer : "queryOder return"
+Customer -> PayService : "queryAccout"
+PayService --> Customer : "queryAccout return"
+Customer -> PayService : "pay"
+PayService --> Customer : "pay return"
+Customer -> PayService : "sendEmial"
+PayService --> Customer : "sendEmial return"
+
+CallMessage:: callMsg0 ( "queryOder" Message0SenderEnd -> Message0ReceiveEnd ) ReturnMessage:: returnMsg1 ( "queryOder return" Message1SenderEnd -> Message1ReceiveEnd ) CallMessage:: callMsg2 ( "queryAccout" Message2SenderEnd -> Message2ReceiveEnd ) ReturnMessage:: returnMsg3 ( "queryAccout return" Message3SenderEnd -> Message3ReceiveEnd ) CallMessage:: callMsg4 ( "pay" Message4SenderEnd -> Message4ReceiveEnd ) ReturnMessage:: returnMsg5 ( "pay return" Message5SenderEnd -> Message5ReceiveEnd ) CallMessage:: callMsg6 ( "sendEmial" Message6SenderEnd -> Message6ReceiveEnd ) ReturnMessage:: returnMsg7 ( "sendEmial return" Message7SenderEnd -> Message7ReceiveEnd ) MessageEnd:: Message0SenderEnd ( Customer callMsg0 ) MessageEnd:: Message0ReceiveEnd ( PayService callMsg0 ) MessageEnd:: Message1SenderEnd ( PayService returnMsg1 ) MessageEnd:: Message1ReceiveEnd ( Customer returnMsg1 ) MessageEnd:: Message2SenderEnd ( Customer callMsg2 ) MessageEnd:: Message2ReceiveEnd ( PayService callMsg2 ) MessageEnd:: Message3SenderEnd ( PayService returnMsg3 ) MessageEnd:: Message3ReceiveEnd ( Customer returnMsg3 ) MessageEnd:: Message4SenderEnd ( Customer callMsg4 ) MessageEnd:: Message4ReceiveEnd ( PayService callMsg4 ) MessageEnd:: Message5SenderEnd ( PayService returnMsg5 ) MessageEnd:: Message5ReceiveEnd ( Customer returnMsg5 ) MessageEnd:: Message6SenderEnd ( Customer callMsg6 ) MessageEnd:: Message6ReceiveEnd ( PayService callMsg6 ) MessageEnd:: Message7SenderEnd ( PayService returnMsg7 ) MessageEnd:: Message7ReceiveEnd ( Customer returnMsg7 ) @enduml

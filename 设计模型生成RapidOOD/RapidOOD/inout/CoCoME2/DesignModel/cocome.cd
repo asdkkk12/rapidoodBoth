@@ -1,0 +1,120 @@
+@startuml
+class Store {
+	- Id : Integer
+	- Name : String
+	- Address : String
+	- IsOpened : Boolean
+}
+class ProductCatalog {
+	- Id : Integer
+	- Name : String
+}
+class CashDesk {
+	- Id : Integer
+	- Name : String
+	- IsOpened : Boolean
+}
+class Sale {
+	- IsComplete : Boolean
+	- Amount : Real
+	- IsReadytoPay : Boolean
+}
+class Cashier {
+	- Id : Integer
+	- Name : String
+}
+class SalesLineItem {
+	- Quantity : Integer
+	- Subamount : Real
+}
+class Item {
+	- Barcode : Integer
+	- Name : String
+	- Price : Real
+	- StockNumber : Integer
+	- OrderPrice : Real
+}
+class Payment {
+	- AmountTendered : Real
+}
+class CashPayment {
+	- Balance : Real
+}
+class CardPayment {
+	- CardAccountNumber : String
+}
+class OrderEntry {
+	- Quantity : Integer
+	- SubAmount : Real
+}
+class Supplier {
+	- Id : Integer
+	- Name : String
+}
+class OrderProduct {
+	- Id : Integer
+	- Time : Date
+	- Amount : Real
+}
+class StoreRepository {
+	+ findStore ( String condition ) : Store
+	+ updateStore ( Store object ) : boolean
+	+ deleteStore ( Store object ) : boolean
+	+ createStore ( ) : Store
+}
+Store "*"--"1" StoreRepository
+class ProductCatalogRepository {
+	+ findProductCatalog ( String condition ) : ProductCatalog
+	+ updateProductCatalog ( ProductCatalog object ) : boolean
+	+ deleteProductCatalog ( ProductCatalog object ) : boolean
+	+ createProductCatalog ( ) : ProductCatalog
+}
+ProductCatalog "*"--"1" ProductCatalogRepository
+class CashDeskRepository {
+	+ findCashDesk ( String condition ) : CashDesk
+	+ updateCashDesk ( CashDesk object ) : boolean
+	+ deleteCashDesk ( CashDesk object ) : boolean
+	+ createCashDesk ( ) : CashDesk
+}
+CashDesk "*"--"1" CashDeskRepository
+class CashierRepository {
+	+ findCashier ( String condition ) : Cashier
+	+ updateCashier ( Cashier object ) : boolean
+	+ deleteCashier ( Cashier object ) : boolean
+	+ createCashier ( ) : Cashier
+}
+Cashier "*"--"1" CashierRepository
+class ItemRepository {
+	+ findItem ( String condition ) : Item
+	+ updateItem ( Item object ) : boolean
+	+ deleteItem ( Item object ) : boolean
+	+ createItem ( ) : Item
+}
+Item "*"--"1" ItemRepository
+class SupplierRepository {
+	+ findSupplier ( String condition ) : Supplier
+	+ updateSupplier ( Supplier object ) : boolean
+	+ deleteSupplier ( Supplier object ) : boolean
+	+ createSupplier ( ) : Supplier
+}
+Supplier "*"--"1" SupplierRepository
+CashPayment--|> Payment
+CardPayment--|> Payment
+Store "BelongedStore: 1"--"AssociationCashdeskes: *" CashDesk
+Store--"Productcatalogs: *" ProductCatalog
+Store--"Items: *" Item
+Store "WorkedStore: 1"--"Cashiers: *" Cashier
+Store "Belongedstore: 1"--"Sales: *" Sale
+ProductCatalog "BelongedCatalog: 1"--"ContainedItems: *" Item
+CashDesk "BelongedCashDesk: 1"--"ContainedSales: *" Sale
+Sale "BelongedSale: 1"--"ContainedSalesLine: *" SalesLineItem
+Sale "BelongedSale: 1"--"AssoicatedPayment: 1" Payment
+SalesLineItem--"BelongedItem: 1" Item
+OrderEntry--"Item: 1" Item
+OrderProduct--"Supplier: 1" Supplier
+OrderProduct--"ContainedEntries: *" OrderEntry
+enum PaymentMethod {
+	CASH
+	CARD
+}
+@enduml

@@ -1,0 +1,188 @@
+-- @nsURI RM=http://www.mydreamy.net/requirementmodel/REMODEL
+-- @nsURI CDM=http://www.rm2pt.com/rapidood/cd/ClassDiagram
+
+module GenerateClassDiagram;
+create OUT : CDM from IN : RM;
+
+-- 根据name找需求模型中的Entity
+helper def: findEntity(name: String): RM!Entity = 
+	RM!Entity->allInstances()->any(e | e.name = name);
+helper def: findAllRelationShip(): Sequence(CDM!Relationship) = 
+	CDM!Relationship->allInstances();
+helper def: getClassDiagram(): CDM!ClassDiagram = 
+	CDM!ClassDiagram->allInstances().first();
+
+
+rule DoaminModel2ClassDiagram {
+	from
+		s: RM!DomainModel
+	to
+		t: CDM!ClassDiagram(
+			elements <- s.entity
+		)
+}	
+
+
+rule Entity2Class {
+	from 
+		s: RM!Entity(
+			s.superEntity.oclIsUndefined()
+		)
+	to
+		clz: CDM!Class(
+			name <- s.name,
+			attributes <- s.attributes
+		)
+}
+
+rule SuperEntityRelationship {
+	from 
+		s: RM!Entity(
+			not s.superEntity.oclIsUndefined()	
+		)
+	to
+		clz: CDM!Class(
+			name <- s.name,
+			attributes <- s.attributes
+		),
+		relation: CDM!Relationship(
+			left <- thisModule.resolveTemp(s, 'clz'),
+			line <- '--',
+			rightDecorator <- '|>',
+			right <- thisModule.resolveTemp(thisModule.findEntity(s.superEntity.name), 'clz')
+		)
+	do {
+		thisModule.getClassDiagram().elements <- thisModule.getClassDiagram().elements.append(relation);
+	}
+}
+
+rule Attribute2Attribute {
+	from 
+		s: RM!Attribute
+	to 
+		t: CDM!Attribute (
+			visibility <- '-',
+			name <- s.name
+		)
+	do {
+		t.type <- thisModule.resolveTemp(s.type, 't');
+	}
+}
+
+-- 找到reference中包含ref的Entity对应的Class
+helper context RM!Reference def: findClass(): CDM!Class = 
+	thisModule.resolveTemp(RM!Entity->allInstances()->any(entity | entity.reference.includes(self)), 'clz');
+
+helper def: findTheOppositeRelationship(left: CDM!Class, right: CDM!Class): CDM!Relationship =
+	CDM!Relationship
+	->allInstances()
+	->select(r | r.right = right and not r.rightCardinality.oclIsUndefined() and r.left = left and r.leftCardinality.oclIsUndefined())
+	->any(e | not e.oclIsUndefined());
+
+-- 防止同一方向的重复关联被重复加入类图。
+helper def: findTheSameRelationship(left: CDM!Class, right: CDM!Class): CDM!Relationship =
+	CDM!Relationship
+	->allInstances()
+	->select(r | r.left = left and r.right = right)
+	->any(e | not e.oclIsUndefined());
+
+rule Reference2Relationship {
+	from 
+		ref: RM!Reference
+	to
+		t: CDM!Relationship (
+		--	left <- ref.findClass(),
+			line <- '--'
+		--	right <- thisModule.resolveTemp(ref.entity, 'clz'),
+		--	rightCardinality <- '"' + ref.name + ': ' + (if ref.ismultiple then '*' else '1' endif) + '"'
+		)
+--	do {
+--		t.left <- ref.findClass();
+--		t.right <- thisModule.resolveTemp(ref.entity, 'clz');
+--		if (ref.ismultiple) {
+--			t.rightCardinality <- ref.name + ': *';
+--		}
+--	}
+	do {
+		t.left <- ref.findClass();	
+		t.right <- thisModule.resolveTemp(ref.entity, 'clz');
+		t.rightCardinality <- '"' + ref.name + ': ' + (if ref.ismultiple then '*' else '1' endif) + '"';
+		if (thisModule.findTheSameRelationship(t.left, t.right).oclIsUndefined()) {
+			if (thisModule.findTheOppositeRelationship(t.right, t.left).oclIsUndefined()) {
+				thisModule.getClassDiagram().elements <- thisModule.getClassDiagram().elements.including(t);
+			} else {
+				thisModule.findTheOppositeRelationship(t.right, t.left).leftCardinality <- t.rightCardinality;
+			}
+		}	
+	}
+}
+
+rule TypeCS2TType {
+	from 
+		s: RM!TypeCS (s.oclIsTypeOf(RM!TypeCS))
+	to
+		t: CDM!Type
+}
+
+rule PrimitiveTypeCS2PrimitiveType {
+	from 
+		s: RM!PrimitiveTypeCS
+	to 
+		t: CDM!PrimitiveType (
+			name <- s.name
+		)
+}
+
+rule EntityType2ClassType {
+	from 
+		s: RM!EntityType
+	to 
+		t: CDM!ReferType (
+			name <- s.entity.name	
+		)
+}
+
+-- ClassDiagram 元模型没有专门的集合类型。
+-- 将 Set(Foo)、List(Foo) 等统一降级为合法的引用类型名，
+-- 这样不会因为 CollectionTypeCS 没有转换规则而丢失属性。
+rule CollectionTypeCS2ReferType {
+	from
+		s: RM!CollectionTypeCS
+	to
+		t: CDM!ReferType (
+			name <- s.name.name
+		)
+}
+
+-- 检测同名枚举类是否已存在于ClassDiagram.elements中
+helper context CDM!Enum def: isDefined(): Boolean =
+	 thisModule.getClassDiagram().elements->select(e | e.oclIsTypeOf(CDM!Enum))->exists(e | e.name=self.name);
+rule EnumEntity2Enum {
+	from 
+		s: RM!EnumEntity
+	to
+		t: CDM!ReferType (
+			name <- s.name	
+		),
+		
+		enum: CDM!Enum (
+			name <- s.name,
+			values <- s.element
+		)
+	do {
+		if (not enum.isDefined()) {
+			thisModule.getClassDiagram().elements <- thisModule.getClassDiagram().elements.including(enum);
+		}
+	}
+}
+
+rule EnumItem2EnumItem {
+	from 
+		s: RM!EnumItem
+	to 
+		t: CDM!EnumItem (
+			name <- s.name			
+		)
+}
+
+-- TODO: CollectionTypeCS2CollectionTypeCS

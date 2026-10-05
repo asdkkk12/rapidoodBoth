@@ -1,0 +1,8 @@
+.DS_Store
+**/target/
+**/bin/
+**/*.class
+*.log
+*.tmp
+.env
+*.local

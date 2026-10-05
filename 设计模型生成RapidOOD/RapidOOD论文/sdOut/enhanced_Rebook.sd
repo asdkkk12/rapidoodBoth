@@ -1,0 +1,20 @@
+@startuml
+participant Customer
+participant RebookService
+
+Customer -> RebookService : "getOrder"
+RebookService --> Customer : "getOrder return"
+Customer -> RebookService : "getTrip"
+RebookService --> Customer : "getTrip return"
+Customer -> RebookService : "payDifference"
+RebookService --> Customer : "payDifference return"
+Customer -> RebookService : "modifyNewOder"
+RebookService --> Customer : "modifyNewOder return"
+Customer -> RebookService : "setNewRoute"
+RebookService --> Customer : "setNewRoute return"
+Customer -> RebookService : "setNewTrain"
+RebookService --> Customer : "setNewTrain return"
+Customer -> RebookService : "setNewSeat"
+RebookService --> Customer : "setNewSeat return"
+
+CallMessage:: callMsg0 ( "getOrder" Message0SenderEnd -> Message0ReceiveEnd ) ReturnMessage:: returnMsg1 ( "getOrder return" Message1SenderEnd -> Message1ReceiveEnd ) CallMessage:: callMsg2 ( "getTrip" Message2SenderEnd -> Message2ReceiveEnd ) ReturnMessage:: returnMsg3 ( "getTrip return" Message3SenderEnd -> Message3ReceiveEnd ) CallMessage:: callMsg4 ( "payDifference" Message4SenderEnd -> Message4ReceiveEnd ) ReturnMessage:: returnMsg5 ( "payDifference return" Message5SenderEnd -> Message5ReceiveEnd ) CallMessage:: callMsg6 ( "modifyNewOder" Message6SenderEnd -> Message6ReceiveEnd ) ReturnMessage:: returnMsg7 ( "modifyNewOder return" Message7SenderEnd -> Message7ReceiveEnd ) CallMessage:: callMsg8 ( "setNewRoute" Message8SenderEnd -> Message8ReceiveEnd ) ReturnMessage:: returnMsg9 ( "setNewRoute return" Message9SenderEnd -> Message9ReceiveEnd ) CallMessage:: callMsg10 ( "setNewTrain" Message10SenderEnd -> Message10ReceiveEnd ) ReturnMessage:: returnMsg11 ( "setNewTrain return" Message11SenderEnd -> Message11ReceiveEnd ) CallMessage:: callMsg12 ( "setNewSeat" Message12SenderEnd -> Message12ReceiveEnd ) ReturnMessage:: returnMsg13 ( "setNewSeat return" Message13SenderEnd -> Message13ReceiveEnd ) MessageEnd:: Message0SenderEnd ( Customer callMsg0 ) MessageEnd:: Message0ReceiveEnd ( RebookService callMsg0 ) MessageEnd:: Message1SenderEnd ( RebookService returnMsg1 ) MessageEnd:: Message1ReceiveEnd ( Customer returnMsg1 ) MessageEnd:: Message2SenderEnd ( Customer callMsg2 ) MessageEnd:: Message2ReceiveEnd ( RebookService callMsg2 ) MessageEnd:: Message3SenderEnd ( RebookService returnMsg3 ) MessageEnd:: Message3ReceiveEnd ( Customer returnMsg3 ) MessageEnd:: Message4SenderEnd ( Customer callMsg4 ) MessageEnd:: Message4ReceiveEnd ( RebookService callMsg4 ) MessageEnd:: Message5SenderEnd ( RebookService returnMsg5 ) MessageEnd:: Message5ReceiveEnd ( Customer returnMsg5 ) MessageEnd:: Message6SenderEnd ( Customer callMsg6 ) MessageEnd:: Message6ReceiveEnd ( RebookService callMsg6 ) MessageEnd:: Message7SenderEnd ( RebookService returnMsg7 ) MessageEnd:: Message7ReceiveEnd ( Customer returnMsg7 ) MessageEnd:: Message8SenderEnd ( Customer callMsg8 ) MessageEnd:: Message8ReceiveEnd ( RebookService callMsg8 ) MessageEnd:: Message9SenderEnd ( RebookService returnMsg9 ) MessageEnd:: Message9ReceiveEnd ( Customer returnMsg9 ) MessageEnd:: Message10SenderEnd ( Customer callMsg10 ) MessageEnd:: Message10ReceiveEnd ( RebookService callMsg10 ) MessageEnd:: Message11SenderEnd ( RebookService returnMsg11 ) MessageEnd:: Message11ReceiveEnd ( Customer returnMsg11 ) MessageEnd:: Message12SenderEnd ( Customer callMsg12 ) MessageEnd:: Message12ReceiveEnd ( RebookService callMsg12 ) MessageEnd:: Message13SenderEnd ( RebookService returnMsg13 ) MessageEnd:: Message13ReceiveEnd ( Customer returnMsg13 ) @enduml

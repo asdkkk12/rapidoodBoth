@@ -1,0 +1,14 @@
+@startuml
+class BankCard {
+	CardID : void
+	CardStatus : void
+	Catalog : void
+	Password : void
+	Balance : void
+}
+class User {
+	UserID : void
+	Name : void
+	Address : void
+}
+@enduml

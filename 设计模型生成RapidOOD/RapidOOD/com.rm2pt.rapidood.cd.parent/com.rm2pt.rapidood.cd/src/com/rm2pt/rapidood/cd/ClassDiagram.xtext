@@ -1,0 +1,117 @@
+grammar com.rm2pt.rapidood.cd.ClassDiagram with org.eclipse.xtext.common.Terminals
+
+generate classDiagram "http://www.rm2pt.com/rapidood/cd/ClassDiagram"
+
+ClassDiagram:
+    {ClassDiagram}
+    '@startuml'
+    (elements += AbstractElement)*
+    '@enduml'
+;
+
+
+AbstractElement:
+    PackageDeclaration | Class | Interface | AbstractClass | Relationship | Enum
+;
+
+PackageDeclaration:
+    'package' name=FQN '{'
+            (elements += AbstractElement)*
+    '}'
+;
+
+FQN:
+    ID (=>'.' ID)*;
+    
+Class:
+    'class' name=SimpleName '{'
+            (attributes += Attribute)*
+            (operations += Operation)*
+    '}';
+
+Interface:
+    'interface' name=SimpleName '{'
+            (attributes += Attribute)*
+            (operations += Operation)*
+    '}';
+    
+AbstractClass:
+    ('abstract') ('class')? name=SimpleName '{'
+            (attributes += Attribute)*
+            (operations += Operation)*
+    '}';
+    
+SimpleName hidden():
+    ID;
+    
+
+    
+Attribute:
+    visibility=Visibility? (isStatic?='{static}')? name=SimpleName ':' type=Type;
+    
+Operation:
+    visibility=Visibility? (isAbstract?='{abstract}')? (isStatic?='{static}')? 
+    name=SimpleName '(' (params+=Parameter (',' params+=Parameter)*)? ')' ':' returnType=Type;
+    
+Parameter:
+    type=Type name=SimpleName;
+
+Visibility:
+    '+' | '-' | '#' | '~';
+
+Relationship:
+	{Relationship}
+    left=[Class|FQN]
+    (leftCardinality=Multiplicity)?
+    (leftDecorator=LineDecorator)?
+    (line=Line)
+    (rightDecorator=LineDecorator)?
+    (rightCardinality=Multiplicity)?
+    right=[Class | FQN]
+    (':' label=Label)?
+;
+
+Multiplicity:
+	DOUBLE_QUOTED_STRING
+;
+LineDecorator: 
+	'<|' | '|>' | 'o' | '*' | '<' | '>'
+;
+Line: 
+	'--' | '-' | '..' | '.'
+;
+Label:
+    ID+
+;  
+
+Type:
+    PrimitiveType | ReferType;
+    
+PrimitiveType:
+	name=('Boolean' | 'Integer' | 'Real' | 'String' | 'Double'
+        | 'UnlimitedNatural' | 'Date'
+        | 'void' | 'int'| 'boolean' | 'double'
+        )
+;
+    
+ReferType: 
+    name=ID 
+;
+
+
+EnumItem:
+	name=SimpleName
+;
+Enum:
+	{Enum}
+    'enum' name=SimpleName '{'
+    (values += EnumItem (values += EnumItem)*)
+	'}'
+;
+
+terminal DOUBLE_QUOTED_STRING:
+	'"' (ESCAPED_CHARACTER | !('\\' | '"' | '.'))* '"';
+
+terminal fragment ESCAPED_CHARACTER:
+	'\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '"' | "'" | '\\');
+

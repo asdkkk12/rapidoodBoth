@@ -1,0 +1,60 @@
+@startuml
+participant TrainticketSystem
+
+TrainticketSystem -> TrainticketSystem : "[Contract excuteOrder] [Postcondition] true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract getPriceByWeightAndRegion] [Definition] priceConfig = PriceConfig.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract getPriceByWeightAndRegion] [Postcondition] true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract executeTicket] [Definition] order = Order.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract executeTicket] [Postcondition] excuteOrder()"
+TrainticketSystem -> TrainticketSystem : "[Contract executeTicket] [Postcondition] result = true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract drawBack] [Postcondition] true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract payDifference] [Definition] order = Order.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract payDifference] [Definition] payment = Payment.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract payDifference] [Postcondition] result = true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract order_cancel_success] [Postcondition] true"
+TrainticketSystem -> TrainticketSystem : "[Contract preserve_success] [Postcondition] true"
+TrainticketSystem -> TrainticketSystem : "[Contract order_create_success] [Postcondition] true"
+TrainticketSystem -> TrainticketSystem : "[Contract order_changed_success] [Postcondition] true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract securityInfoCheck] [Definition] order = Order.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract securityInfoCheck] [Definition] securityConfig = SecurityConfig.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract securityInfoCheck] [Postcondition] true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract getCheapestRoutes] [Definition] travel = Travel.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract getCheapestRoutes] [Postcondition] true"
+TrainticketSystem -> TrainticketSystem : "[Contract getQuickestRoutes] [Definition] travel = Travel.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract getQuickestRoutes] [Postcondition] true"
+TrainticketSystem -> TrainticketSystem : "[Contract getMinStopRoutes] [Definition] travel = Travel.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract getMinStopRoutes] [Postcondition] true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract distributeSeat] [Definition] order = Order.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract distributeSeat] [Postcondition] true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract getLeftTicketOfInterval] [Definition] order = Order.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract getLeftTicketOfInterval] [Definition] config = Config.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract getLeftTicketOfInterval] [Postcondition] true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract getTransferResult] [Definition] travel = Travels.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract getTransferResult] [Postcondition] true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract getByCheapest] [Definition] route = getCheapestRoutes()"
+TrainticketSystem -> TrainticketSystem : "[Contract getByCheapest] [Definition] train = Train.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract getByCheapest] [Definition] seat = getLeftTicketOfInterval()"
+TrainticketSystem -> TrainticketSystem : "[Contract getByCheapest] [Postcondition] true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract getByQuickest] [Definition] route = getQuickestRoutes()"
+TrainticketSystem -> TrainticketSystem : "[Contract getByQuickest] [Definition] train = Train.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract getByQuickest] [Definition] seat = getLeftTicketOfInterval()"
+TrainticketSystem -> TrainticketSystem : "[Contract getByQuickest] [Postcondition] true"
+
+TrainticketSystem -> TrainticketSystem : "[Contract getByMinStation] [Definition] route = getMinStopRoutes()"
+TrainticketSystem -> TrainticketSystem : "[Contract getByMinStation] [Definition] train = Train.allInstance()"
+TrainticketSystem -> TrainticketSystem : "[Contract getByMinStation] [Definition] seat = getLeftTicketOfInterval()"
+TrainticketSystem -> TrainticketSystem : "[Contract getByMinStation] [Postcondition] true"
+
+@enduml

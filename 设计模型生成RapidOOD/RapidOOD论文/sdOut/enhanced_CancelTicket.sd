@@ -1,0 +1,18 @@
+@startuml
+participant Customer
+participant CancelTicketService
+
+Customer -> CancelTicketService : "queryOrder"
+CancelTicketService --> Customer : "queryOrder return"
+Customer -> CancelTicketService : "modifyOrder"
+CancelTicketService --> Customer : "modifyOrder return"
+Customer -> CancelTicketService : "caculate"
+CancelTicketService --> Customer : "caculate return"
+Customer -> CancelTicketService : "drawback"
+CancelTicketService --> Customer : "drawback return"
+Customer -> CancelTicketService : "queryUser"
+CancelTicketService --> Customer : "queryUser return"
+Customer -> CancelTicketService : "sendNotification"
+CancelTicketService --> Customer : "sendNotification return"
+
+CallMessage:: callMsg0 ( "queryOrder" Message0SenderEnd -> Message0ReceiveEnd ) ReturnMessage:: returnMsg1 ( "queryOrder return" Message1SenderEnd -> Message1ReceiveEnd ) CallMessage:: callMsg2 ( "modifyOrder" Message2SenderEnd -> Message2ReceiveEnd ) ReturnMessage:: returnMsg3 ( "modifyOrder return" Message3SenderEnd -> Message3ReceiveEnd ) CallMessage:: callMsg4 ( "caculate" Message4SenderEnd -> Message4ReceiveEnd ) ReturnMessage:: returnMsg5 ( "caculate return" Message5SenderEnd -> Message5ReceiveEnd ) CallMessage:: callMsg6 ( "drawback" Message6SenderEnd -> Message6ReceiveEnd ) ReturnMessage:: returnMsg7 ( "drawback return" Message7SenderEnd -> Message7ReceiveEnd ) CallMessage:: callMsg8 ( "queryUser" Message8SenderEnd -> Message8ReceiveEnd ) ReturnMessage:: returnMsg9 ( "queryUser return" Message9SenderEnd -> Message9ReceiveEnd ) CallMessage:: callMsg10 ( "sendNotification" Message10SenderEnd -> Message10ReceiveEnd ) ReturnMessage:: returnMsg11 ( "sendNotification return" Message11SenderEnd -> Message11ReceiveEnd ) MessageEnd:: Message0SenderEnd ( Customer callMsg0 ) MessageEnd:: Message0ReceiveEnd ( CancelTicketService callMsg0 ) MessageEnd:: Message1SenderEnd ( CancelTicketService returnMsg1 ) MessageEnd:: Message1ReceiveEnd ( Customer returnMsg1 ) MessageEnd:: Message2SenderEnd ( Customer callMsg2 ) MessageEnd:: Message2ReceiveEnd ( CancelTicketService callMsg2 ) MessageEnd:: Message3SenderEnd ( CancelTicketService returnMsg3 ) MessageEnd:: Message3ReceiveEnd ( Customer returnMsg3 ) MessageEnd:: Message4SenderEnd ( Customer callMsg4 ) MessageEnd:: Message4ReceiveEnd ( CancelTicketService callMsg4 ) MessageEnd:: Message5SenderEnd ( CancelTicketService returnMsg5 ) MessageEnd:: Message5ReceiveEnd ( Customer returnMsg5 ) MessageEnd:: Message6SenderEnd ( Customer callMsg6 ) MessageEnd:: Message6ReceiveEnd ( CancelTicketService callMsg6 ) MessageEnd:: Message7SenderEnd ( CancelTicketService returnMsg7 ) MessageEnd:: Message7ReceiveEnd ( Customer returnMsg7 ) MessageEnd:: Message8SenderEnd ( Customer callMsg8 ) MessageEnd:: Message8ReceiveEnd ( CancelTicketService callMsg8 ) MessageEnd:: Message9SenderEnd ( CancelTicketService returnMsg9 ) MessageEnd:: Message9ReceiveEnd ( Customer returnMsg9 ) MessageEnd:: Message10SenderEnd ( Customer callMsg10 ) MessageEnd:: Message10ReceiveEnd ( CancelTicketService callMsg10 ) MessageEnd:: Message11SenderEnd ( CancelTicketService returnMsg11 ) MessageEnd:: Message11ReceiveEnd ( Customer returnMsg11 ) @enduml

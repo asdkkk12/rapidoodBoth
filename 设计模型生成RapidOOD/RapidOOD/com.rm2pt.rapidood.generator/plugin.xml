@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="com.rm2pt.rapidood.generator.commands.category"
+            name="Sample Category">
+      </category>
+      <command
+            categoryId="com.rm2pt.rapidood.generator.commands.category"
+            name="Sample Command"
+            id="com.rm2pt.rapidood.generator.commands.sampleCommand">
+      </command>
+	  <command
+		  id="com.rm2pt.rapidood.generator.commands.domaindesignmodelgenerator"
+		  name="Generate Domain Design Model">
+	  </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.rm2pt.rapidood.generator.handlers.SampleHandler"
+            commandId="com.rm2pt.rapidood.generator.commands.sampleCommand">
+      </handler>
+      <handler
+		    class="com.rm2pt.rapidood.generator.handlers.DomainDesignModelGeneratorHandler"
+			commandId="com.rm2pt.rapidood.generator.commands.domaindesignmodelgenerator">
+	  </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.rm2pt.rapidood.generator.commands.sampleCommand"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+6">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="com.rm2pt.rapidood.generator.menus.sampleMenu"
+               label="Sample Menu"
+               mnemonic="M">
+            <command
+                  commandId="com.rm2pt.rapidood.generator.commands.sampleCommand"
+                  id="com.rm2pt.rapidood.generator.menus.sampleCommand"
+                  mnemonic="S">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="com.rm2pt.rapidood.generator.toolbars.sampleToolbar">
+            <command
+                  id="com.rm2pt.rapidood.generator.toolbars.sampleCommand"
+                  commandId="com.rm2pt.rapidood.generator.commands.sampleCommand"
+                  icon="icons/sample.png"
+                  tooltip="Say hello world">
+            </command>
+         </toolbar>
+      </menuContribution>
+      <menuContribution
+			allPopups="false"
+			locationURI="popup:org.eclipse.ui.popup.any">
+			<menu
+				id="RapidOOD"
+				label="RapidOOD">
+				<command
+	                commandId="com.rm2pt.rapidood.generator.commands.domaindesignmodelgenerator"
+	                label="Generate Domain Design Model"
+	                style="push">
+	          	</command>
+	          	<visibleWhen checkEnabled="true">
+	          		<or>
+	          			<reference
+	          				definitionId="net.mydreamy.requirementmodel.REMODEL.Editor.opened">
+	          			</reference>
+	          			<iterate ifEmpty="false">
+	          				<adapt
+	          					type="org.eclipse.core.resources.IResource"> 
+	          					<test 
+	          						property="org.eclipse.core.resources.name"
+	          						value="*.remodel">
+          						</test>
+      						</adapt>
+  						</iterate>
+					</or>
+				</visibleWhen>
+			</menu>
+		</menuContribution>
+   </extension>
+
+</plugin>

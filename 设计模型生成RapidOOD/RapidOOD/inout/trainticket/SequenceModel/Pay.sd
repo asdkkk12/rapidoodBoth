@@ -1,0 +1,18 @@
+@startuml
+participant Customer
+participant PayService
+
+Customer -> PayService : "queryOder"
+PayService --> Customer : "queryOder return"
+Customer -> PayService : "queryAccout"
+PayService --> Customer : "queryAccout return"
+Customer -> PayService : "pay"
+PayService --> Customer : "pay return"
+Customer -> PayService : "sendEmial"
+PayService --> Customer : "sendEmial return"
+
+PayService -> PayService : "[Definition] order = Order.allInstance()"
+PayService -> PayService : "[Definition] payment = Payment.allInstance()"
+PayService -> PayService : "[Postcondition] result = true"
+
+@enduml

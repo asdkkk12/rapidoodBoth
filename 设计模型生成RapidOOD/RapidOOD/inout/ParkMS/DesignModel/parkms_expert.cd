@@ -1,0 +1,122 @@
+@startuml
+' ===================== 领域实体类（4个）=====================
+class ParkRecord {
+	- Id : Integer
+	- PlateNumber : String
+	- Type : VehicleType
+	- EntryTime : Date
+	- OutTime : Date
+	- IsParking : Boolean
+	- TotalPayment : Real
+	- Description : String
+}
+class Park {
+	- Id : Integer
+	- Name : String
+	- Location : String
+	- SmallPrice : Real
+	- LargePrice : Real
+	- MotoPrice : Real
+	- IsOpened : Boolean
+}
+class Vehicle {
+	- Id : Integer
+	- PlateNumber : String
+	- Type : VehicleType
+}
+class Member {
+	- Id : Integer
+	- Name : String
+	- Balance : Real
+}
+
+' ===================== 仓储类（2个，AutoCRUD）=====================
+class ParkRepository {
+	+ findPark ( String condition ) : Park
+	+ updatePark ( Park object ) : boolean
+	+ deletePark ( Park object ) : boolean
+	+ createPark ( ) : Park
+}
+class VehicleRepository {
+	+ findVehicle ( String condition ) : Vehicle
+	+ updateVehicle ( Vehicle object ) : boolean
+	+ deleteVehicle ( Vehicle object ) : boolean
+	+ createVehicle ( ) : Vehicle
+}
+
+' ===================== 业务服务类（9个，来自 remodel Services）=====================
+class ParkMSSystem {
+	' TempProperty: CurrentPark:Park, CurrentParkRecord:ParkRecord, CurrentMember:Member, CurrentPayment:Real
+	- CurrentPark : Park
+	- CurrentParkRecord : ParkRecord
+	- CurrentMember : Member
+	+ openPark ( Integer parkID ) : Boolean
+	+ closePark ( Integer parkID ) : Boolean
+}
+class SetPriceService {
+	+ setSmallPrice ( Integer parkID, Real price ) : Boolean
+	+ setLargePrice ( Integer parkID, Real price ) : Boolean
+	+ setMotoPrice ( Integer parkID, Real price ) : Boolean
+}
+class GetHistoryService {
+	+ getHistoryByPlateNumber ( String plateNumber ) : Set
+	+ getHistoryByEntryTime ( Date from, Date to ) : Set
+	+ getHistoryByOutTime ( Date from, Date to ) : Set
+	+ getHistoryByMember ( Integer memberID ) : Set
+}
+class AutomaticEntryService {
+	' TempProperty: RecordID:Integer (primitive, not ReferType)
+	+ automaticEntry ( String plateNumber, Date time ) : Boolean
+}
+class ManuallyAllowOutService {
+	+ manuallyAllowOut ( String plateNumber, Date time ) : Boolean
+}
+class ManuallyAllowEntryService {
+	+ manuallyAllowEntry ( String plateNumber, VehicleType type, Date time ) : Boolean
+}
+class AutomaticOutService {
+	+ scanPlateNumber ( String plateNumber, Date time ) : Real
+	+ onlinePay ( Integer memberID ) : Boolean
+}
+class RegisterService {
+	+ registerMember ( Integer memberID, String name ) : Boolean
+	+ registerVehicle ( Integer vehicleID, String plateNumber, VehicleType type ) : Boolean
+}
+class RechargeService {
+	+ recharge ( Integer memberID, Real amount ) : Boolean
+}
+
+' ===================== 实体-实体关联（5条，同 parkms.cd）=====================
+Park "*"--"1" ParkRepository
+Vehicle "*"--"1" VehicleRepository
+ParkRecord "OwningRecords: *"--"OwnedPark: 1" Park
+Park "Parks: *"--"OwningMembers: *" Member
+Vehicle "OwningVehicles: *"--"OwnedMember: 1" Member
+
+' ===================== 服务-实体关联（18条）=====================
+ParkMSSystem--Park
+ParkMSSystem--ParkRecord
+ParkMSSystem--Member
+SetPriceService--Park
+GetHistoryService--ParkRecord
+GetHistoryService--Member
+AutomaticEntryService--Park
+AutomaticEntryService--ParkRecord
+ManuallyAllowOutService--ParkRecord
+ManuallyAllowEntryService--Park
+ManuallyAllowEntryService--ParkRecord
+ManuallyAllowEntryService--Vehicle
+AutomaticOutService--ParkRecord
+AutomaticOutService--Vehicle
+AutomaticOutService--Member
+RegisterService--Member
+RegisterService--Vehicle
+RechargeService--Member
+
+enum VehicleType {
+	SMALL
+	LARGE
+	MOTOCYCLE
+	SPECIAL
+}
+@enduml

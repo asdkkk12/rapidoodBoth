@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: rapidood-generator
+
+server:
+  port: 8080
+
+# ─────────────────────────────────────────────────────────────
+# 固定输入 / 输出路径
+#
+#   input-dir  : 存放唯一 .remodel 文件的目录
+#   output-dir : 输出目录，文件名 = {原文件名}_{yyyyMMdd_HHmmss}.cd
+# ─────────────────────────────────────────────────────────────
+rapidood:
+  paths:
+    input-dir: /Users/yuanyaowu/Desktop/实验室材料/rapidOOD/input
+    output-dir: /Users/yuanyaowu/Desktop/实验室材料/rapidOOD/output
+    # 以下两项保留供"自定义路径"接口的兼容逻辑使用，通常无需修改
+    input-file:
+    output-follow-input: false
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
